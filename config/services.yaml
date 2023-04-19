@@ -10,6 +10,7 @@ parameters:
   #id de la balise body pour
   # chaque page du site
   HOME_PAGE: "home"
+  BIBLIOTHEQUE: "bibliotheque"
   ADMIN_PAGE: "admin"
   ADMIN_MEMBER_MANAGEMENT_PAGE: "member-management"
   MEMBER_PAGE: "member-space"

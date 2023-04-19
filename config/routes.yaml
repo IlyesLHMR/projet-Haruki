@@ -9,6 +9,11 @@ app_home: # Page Accueil
   path: /
   controller: App\Controller\HomeController::index
 
+#  Page de la bibliotheque
+app_bibliotheque:
+  path: /bibliotheque
+  controller: App\Controller\BibliothequeController::index
+
 # Back Office Admin
 app_admin:
   path: /admin

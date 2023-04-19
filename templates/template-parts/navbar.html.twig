@@ -1,1 +1,26 @@
-<nav></nav>
+<nav>
+    <a href="#" class="nav-icon" aria-label="homepage" aria-current="page">
+      <span><img src="{{ asset('assets/img/test_logo.jpg') }}" alt="logo-haruki" /></span>
+    </a 
+    <div class="main-navlinks">
+      <button type="button" class="hamburger"  aria-label="Toggle Navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      <div class="navlinks-container">
+        <a href="{{ path('app_home') }}" aria-current="page">Home</a>
+        <a href="{{ path('app_bibliotheque') }}">Bibliothèque</a>
+        <a href="#">Services</a>    
+      </div>
+    </div>
+
+    <div class="nav-authentication">
+      <a href="#" class="user-toggler" aria-label="Sign in page">
+      </a>
+      <div class="sign-btns">
+        <a href="{{ path('app_register') }}"><button type="button">Inscription</button></a>
+        <a href="{{ path('app_login') }}"><button type="submit"> Connexion</button></a>
+      </div>
+    </div>
+</nav>
