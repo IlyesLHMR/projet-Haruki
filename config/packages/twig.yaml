@@ -1,0 +1,17 @@
+twig:
+  default_path: "%kernel.project_dir%/templates"
+  file_name_pattern: ["*.twig"]
+  form_themes: ["bootstrap_5_layout.html.twig"]
+
+  # globals
+  globals:
+    HOME_PAGE: "home"
+    ADMIN_PAGE: "admin"
+    ADMIN_MEMBER_MANAGEMENT_PAGE: "member-management"
+    MEMBER_PAGE: "member-space"
+    SIGN_UP: "signup"
+    POST_SIGN_UP: "email-confirmation"
+
+when@test:
+  twig:
+    strict_variables: true
