@@ -11,6 +11,7 @@ twig:
     MEMBER_PAGE: "member-space"
     SIGN_UP: "signup"
     POST_SIGN_UP: "email-confirmation"
+    ORDER_CONFIRMATION: "confirmation-achat"
 
 when@test:
   twig:
