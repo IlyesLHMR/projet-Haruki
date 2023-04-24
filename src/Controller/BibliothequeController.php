@@ -27,9 +27,23 @@ class BibliothequeController extends AbstractController
 
     public function index(): Response
     {
+        $bookList=[
+             'book1', 
+             'book2', 
+             'book3', 
+             'book4', 
+             'book5', 
+             'book6', 
+             'book7', 
+             'book8', 
+             'book9', 
+             'book10', 
+        ];
+
         return $this->render('bibliotheque/index.html.twig', [
             'userInfo' => $this->userInfo,
             'bodyId' => $this->bodyId,
+            'bookList' => $bookList,
         ]);
     }
 }

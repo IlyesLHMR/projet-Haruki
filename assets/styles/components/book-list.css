@@ -1,4 +1,24 @@
-.book-list div {
-    width: 150 px;
-    height: 300 px;
+
+
+.bookCard {
+    
 }
+
+
+
+.bookCard h1 {
+    font-size: 20px;
+}
+
+.bookCard .card {
+    width: 150px;
+    height: 300px;
+}
+
+.bookCard button {
+    margin: 15px;
+    border: none;
+    border-radius: 7px;
+    background-color: white;
+}
+
