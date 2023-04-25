@@ -8,8 +8,9 @@ use App\Service\AppHelpers;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class AdminController extends AbstractController
+class BibliothequeController extends AbstractController
 {
+    private string $bodyId;
     private $app;
     private $db;
     private $userInfo;
@@ -18,6 +19,7 @@ class AdminController extends AbstractController
     public function __construct(ManagerRegistry $doctrine,  AppHelpers $app, RequestStack $requestStack)
     {
         $this->app = $app;
+        $this->bodyId = $app->getBodyId('BIBLIOTHEQUE');
         $this->db = $doctrine->getManager();
         $this->userInfo = $app->getUser();
         $this->session = $requestStack->getSession();
@@ -25,23 +27,23 @@ class AdminController extends AbstractController
 
     public function index(): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $bookList=[
+             'book1', 
+             'book2', 
+             'book3', 
+             'book4', 
+             'book5', 
+             'book6', 
+             'book7', 
+             'book8', 
+             'book9', 
+             'book10', 
+        ];
 
-        return $this->render('admin/index.html.twig', [
+        return $this->render('bibliotheque/index.html.twig', [
             'userInfo' => $this->userInfo,
-            'bodyId' => $this->app->getBodyId('ADMIN_PAGE'),
+            'bodyId' => $this->bodyId,
+            'bookList' => $bookList,
         ]);
     }
-
-    public function memberManagement(): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
-
-        return $this->render('admin/member-management.html.twig', [
-            'userInfo' => $this->userInfo,
-            'bodyId' => $this->app->getBodyId('ADMIN_MEMBER_MANAGEMENT_PAGE'),
-        ]);
-    }
-
-    
 }

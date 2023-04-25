@@ -6,12 +6,16 @@ twig:
   # globals
   globals:
     HOME_PAGE: "home"
+    BIBLIOTHEQUE: "bibliotheque"
     ADMIN_PAGE: "admin"
     ADMIN_MEMBER_MANAGEMENT_PAGE: "member-management"
     MEMBER_PAGE: "member-space"
     SIGN_UP: "signup"
     POST_SIGN_UP: "email-confirmation"
+    ORDER_CONFIRMATION: "confirmation-achat"
+    LOGIN_PAGE: "login"
 
 when@test:
   twig:
     strict_variables: true
+

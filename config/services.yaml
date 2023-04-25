@@ -10,12 +10,14 @@ parameters:
   #id de la balise body pour
   # chaque page du site
   HOME_PAGE: "home"
+  BIBLIOTHEQUE: "bibliotheque"
   ADMIN_PAGE: "admin"
   ADMIN_MEMBER_MANAGEMENT_PAGE: "member-management"
   MEMBER_PAGE: "member-space"
   SIGN_UP: "signup"
   POST_SIGN_UP: "email-confirmation"
-
+  ORDER_CONFIRMATION: "confirmation-achat"
+  LOGIN_PAGE: "login"
 services:
   # default configuration for services in *this* file
   _defaults:
