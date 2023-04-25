@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MangaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,18 @@ class Manga
 
     #[ORM\Column(type: 'string', length: 255, nullable: true, options:['collation' => 'utf8_general_ci'])]
     private $image_cover = null;
+
+    #[ORM\ManyToOne(inversedBy: 'manga')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Serie $serie = null;
+
+    #[ORM\OneToMany(mappedBy: 'manga', targetEntity: ListeDeLecture::class, orphanRemoval: true)]
+    private Collection $listeDeLectures;
+
+    public function __construct()
+    {
+        $this->listeDeLectures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +89,48 @@ class Manga
     public function setImageCover(?string $image_cover): self
     {
         $this->image_cover = $image_cover;
+
+        return $this;
+    }
+
+    public function getSerie(): ?Serie
+    {
+        return $this->serie;
+    }
+
+    public function setSerie(?Serie $serie): self
+    {
+        $this->serie = $serie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ListeDeLecture>
+     */
+    public function getListeDeLectures(): Collection
+    {
+        return $this->listeDeLectures;
+    }
+
+    public function addListeDeLecture(ListeDeLecture $listeDeLecture): self
+    {
+        if (!$this->listeDeLectures->contains($listeDeLecture)) {
+            $this->listeDeLectures->add($listeDeLecture);
+            $listeDeLecture->setManga($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListeDeLecture(ListeDeLecture $listeDeLecture): self
+    {
+        if ($this->listeDeLectures->removeElement($listeDeLecture)) {
+            // set the owning side to null (unless already changed)
+            if ($listeDeLecture->getManga() === $this) {
+                $listeDeLecture->setManga(null);
+            }
+        }
 
         return $this;
     }
