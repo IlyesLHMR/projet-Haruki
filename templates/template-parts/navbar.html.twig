@@ -1,1 +1,68 @@
-<nav></nav>
+<nav>
+    <a href="#" class="nav-icon" aria-label="homepage" aria-current="page">
+      <span><img src="{{ asset('assets/img/test_logo.jpg') }}" alt="logo-haruki" /></span>
+    </a 
+    <div class="main-navlinks">
+      <button type="button" class="hamburger"  aria-label="Toggle Navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      {% if userInfo.isAdmin %}
+
+      <div class="navlinks-container">
+        <a href="{{ path('app_home') }}" aria-current="page">Home</a>
+        <a href="{{ path('app_bibliotheque') }}">Bibliothèque</a>
+        <a href="#">Backoffice</a>    
+      </div>
+    </div>
+
+    <div class="nav-authentication">
+      <a href="#" class="user-toggler" aria-label="Sign in page">
+      </a>
+      <div class="sign-btns">
+
+        <a href="{{ path('app_logout') }}"><button type="submit"> Déconnexion</button></a>
+      </div>
+    </div>
+
+  {% elseif userInfo.isLoggedIn %}
+
+  <div class="navlinks-container">
+        <a href="{{ path('app_home') }}" aria-current="page">Home</a>
+        <a href="{{ path('app_bibliotheque') }}">Bibliothèque</a>   
+        <a href="{{ path('app_member') }}">Mon compte</a>   
+      </div>
+    </div>
+
+    <div class="nav-authentication">
+      <a href="#" class="user-toggler" aria-label="Sign in page">
+      </a>
+      <div class="sign-btns">
+        <a href="{{ path('app_logout') }}"><button type="submit">Déconnexion</button></a>
+      </div>
+    </div>
+
+  {% else %}
+
+    <div class="navlinks-container">
+        <a href="{{ path('app_home') }}" aria-current="page">Home</a>
+        <a href="{{ path('app_bibliotheque') }}">Bibliothèque</a>   
+      </div>
+    </div>
+
+    <div class="nav-authentication">
+      <a href="#" class="user-toggler" aria-label="Sign in page">
+      </a>
+      <div class="sign-btns">
+
+        <a href="{{ path('app_login') }}"><button type="submit"> Connexion</button></a>
+        <a href="{{ path('app_register') }}"><button type="submit"> Inscription</button></a>
+      </div>
+    </div>
+
+  {% endif %}
+
+
+</nav>

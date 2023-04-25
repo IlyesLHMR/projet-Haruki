@@ -40,11 +40,28 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response  
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
-        }
+
+    //  A verifier autre methode pour gerer la navbar dynamiquement
+        // if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+        //     return new RedirectResponse($targetPath);  
+        // }
+
+        // if(in_array('ROLE_SUPER_ADMIN', $token->getUser()->getRoles(), true))
+        // {
+        //     return new RedirectResponse($this->urlGenerator->generate('app_admin_member_management'));
+        // }
+
+        // if(in_array('ROLE_ADMIN', $token->getUser()->getRoles(), true))
+        // {
+        //     return new RedirectResponse($this->urlGenerator->generate('app_admin'));
+        // }
+
+        // if(in_array('ROLE_USER', $token->getUser()->getRoles(), true))
+        // {
+        //     return new RedirectResponse($this->urlGenerator->generate('app_member'));
+        // }
 
         $currentRoute = $request->get('_route');
         if ($currentRoute == 'app_register') {
