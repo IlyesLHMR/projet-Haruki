@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: MangaRepository::class)]
 class Manga
@@ -34,6 +35,7 @@ class Manga
 
     #[ORM\OneToMany(mappedBy: 'manga', targetEntity: ListeDeLecture::class, orphanRemoval: true)]
     private Collection $listeDeLectures;
+  
 
     public function __construct()
     {
@@ -133,5 +135,26 @@ class Manga
         }
 
         return $this;
+    }
+    private $slug;
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setSlugFromTitle(SluggerInterface $slugger)
+    {
+        $this->slug = $slugger->slug($this->getImageCover())->lower();
     }
 }

@@ -17,7 +17,7 @@ app_bibliotheque:
 # Back Office Admin
 app_admin:
   path: /admin
-  controller: App\Controller\AdminController::index
+  controller: App\Controller\Admin\DashboardController::index
 
 app_admin_member_management:
   path: /admin/members

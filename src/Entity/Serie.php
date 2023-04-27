@@ -41,6 +41,11 @@ class Serie
         $this->manga = new ArrayCollection();
     }
 
+    public function __toString()
+{
+    return $this->nom_serie;
+}
+
     public function getId(): ?int
     {
         return $this->id;
