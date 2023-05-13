@@ -24,6 +24,9 @@ class ListeDeLecture
     #[ORM\JoinColumn(nullable: false)]
     private ?Manga $manga = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $titre = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class ListeDeLecture
     public function setManga(?Manga $manga): self
     {
         $this->manga = $manga;
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
 
         return $this;
     }

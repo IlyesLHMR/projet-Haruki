@@ -27,6 +27,11 @@ app_admin_member_management:
 app_member:
   path: member/profile
   controller: App\Controller\MembreController::index
+
+app_member_readList:
+  path: member/readList
+  controller: App\Controller\MembreController::readList
+
 # Login / Logout
 app_login:
   path: /login
@@ -36,6 +41,7 @@ app_login:
 app_logout:
   path: /logout
   methods: GET
+
 # Inscription
 app_register:
   path: /register
