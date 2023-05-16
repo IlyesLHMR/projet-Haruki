@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<h3>{{ series.getNomSerie }}</h3>
+<p>{{series.descriptif}}</p>
+<section class="col-12 row-5">
+    <div class="book-list row justify-content-center">
+
+        {% for manga in mangas %}
+        
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+                <div class="bookCard">
+                    <button class="card p-0 border-0">
+                        <img style="" src="{{ asset('assets/img/uploaded/' ~ manga.image_cover) }}" alt="">
+                        <div class="card-body">
+                            <p class="card-text">tome {{ manga.numeroTome }}</p> 
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\ListeDeLecture;
+use App\Form\ListeDeLectureType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\AppHelpers;
@@ -23,6 +25,7 @@ class MembreController extends AbstractController
         $this->session = $requestStack->getSession();
     }
 
+    // Page d'accueil des membres connectés
     public function index(): Response
     {
         return $this->render('membre/index.html.twig', [
@@ -30,4 +33,18 @@ class MembreController extends AbstractController
             'bodyId' => $this->app->getBodyId('MEMBER_PAGE'),
         ]);
     }
+
+    public function readList(): Response
+    {   $ListeDeLecture = new ListeDeLecture();
+        $form = $this->createForm(ListeDeLectureType::class, $ListeDeLecture);
+
+        return $this->render('membre/readList.html.twig', [
+            'userInfo' => $this->userInfo,
+            'bodyId' => $this->app->getBodyId('MEMBER_PAGE'),
+            'form'=>$form
+        ]);
+    }
+
+   
+   
 }

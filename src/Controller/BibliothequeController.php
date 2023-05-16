@@ -2,11 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Manga;
+use App\Entity\Serie;
+use App\Repository\MangaRepository;
+use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\AppHelpers;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BibliothequeController extends AbstractController
 {
@@ -25,25 +31,35 @@ class BibliothequeController extends AbstractController
         $this->session = $requestStack->getSession();
     }
 
-    public function index(): Response
+    // Appel de la page /bibliotheque pour l'affichage des series.
+    public function index(SerieRepository $serieRepo): Response
     {
-        $bookList=[
-             'book1', 
-             'book2', 
-             'book3', 
-             'book4', 
-             'book5', 
-             'book6', 
-             'book7', 
-             'book8', 
-             'book9', 
-             'book10', 
-        ];
+      //$serieRepo = $serieRepo->findAll();
+        $serieRepo = $this->db->getRepository(Serie::class)->findAll();
+        shuffle($serieRepo); // pour l'affichage de manière aléatoire des valeurs de ma bdd
 
         return $this->render('bibliotheque/index.html.twig', [
             'userInfo' => $this->userInfo,
-            'bodyId' => $this->bodyId,
-            'bookList' => $bookList,
+            'series' => $serieRepo,
+
+        ]);
+        
+    }
+
+    // Appel de la page de détail des series. 
+    // #[Route("/bibliotheque/{id}",name:"app_detail_serie")]
+    public function detail($id, SerieRepository $serieRepo, MangaRepository $mangaRepo): Response
+    {
+        $serieRepo = $this->db->getRepository(Serie::class)->findOneBy(['id' => $id]);
+        $mangaRepo = $this->db->getRepository(Manga::class)->findAll();
+
+        return $this->render('bibliotheque/detail.html.twig', [
+            'userInfo' => $this->userInfo,
+            'series' =>$serieRepo,
+            'mangas' =>$mangaRepo,
         ]);
     }
+
+  
+    
 }

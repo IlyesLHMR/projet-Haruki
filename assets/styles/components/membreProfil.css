@@ -1,0 +1,32 @@
+
+.member-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.general-setting {
+    background-color: pink;
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    height: 90vh;
+    border-radius: 10px;
+    margin: 1rem;
+}
+
+.general-setting li {
+    margin: 1rem;
+    list-style-type: none;
+    margin-top: 2rem;
+
+}
+
+
+.affichageSetting {
+    background-color: grey;
+    width: 70vh;
+    height: 70vh;
+    border-radius: 10px;
+    margin: 1rem;
+}

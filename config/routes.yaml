@@ -10,14 +10,19 @@ app_home: # Page Accueil
   controller: App\Controller\HomeController::index
 
 #  Page de la bibliotheque
-app_bibliotheque:
+app_bibliotheque:    # Liste des séries 
   path: /bibliotheque
   controller: App\Controller\BibliothequeController::index
+
+app_detail_serie:  # Liste détaillé des mangas par série
+  path: /bibliotheque/{id}
+  controller: App\Controller\BibliothequeController::detail
+
 
 # Back Office Admin
 app_admin:
   path: /admin
-  controller: App\Controller\AdminController::index
+  controller: App\Controller\Admin\DashboardController::index
 
 app_admin_member_management:
   path: /admin/members
@@ -27,6 +32,11 @@ app_admin_member_management:
 app_member:
   path: member/profile
   controller: App\Controller\MembreController::index
+
+app_member_readList:
+  path: member/readList
+  controller: App\Controller\MembreController::readList
+
 # Login / Logout
 app_login:
   path: /login
@@ -36,6 +46,7 @@ app_login:
 app_logout:
   path: /logout
   methods: GET
+
 # Inscription
 app_register:
   path: /register

@@ -16,6 +16,17 @@ class ListeDeLecture
     #[ORM\Column(type: 'boolean',nullable: false)]
     private $lu = null;
 
+    #[ORM\ManyToOne(inversedBy: 'liste_lecture')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'listeDeLectures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Manga $manga = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $titre = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +40,42 @@ class ListeDeLecture
     public function setLu(bool $lu): self
     {
         $this->lu = $lu;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getManga(): ?Manga
+    {
+        return $this->manga;
+    }
+
+    public function setManga(?Manga $manga): self
+    {
+        $this->manga = $manga;
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
 
         return $this;
     }
