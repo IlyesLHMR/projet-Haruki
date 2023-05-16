@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+
+
+
+
+
 /*variables couleurs racines */
+
 :root {
     --texte-principal: #2c2c2c;
     --texte-secondaire: #c1c1c1;
@@ -35,11 +42,11 @@ html, body {
     height: 100%;
     min-height: 100vh;
     scroll-behavior: smooth;
+    margin-bottom: 150vh;
 }
 
 main {
-    height: 100%;
-    min-height: 100vh;
+
 }
 /*
     reglage du body - styles par defaut:

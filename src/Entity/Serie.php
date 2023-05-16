@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SerieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
@@ -35,6 +36,9 @@ class Serie
 
     #[ORM\OneToMany(mappedBy: 'serie', targetEntity: Manga::class, orphanRemoval: true)]
     private Collection $manga;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $descriptif = null;
 
     public function __construct()
     {
@@ -149,6 +153,18 @@ class Serie
                 $manga->setSerie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescriptif(): ?string
+    {
+        return $this->descriptif;
+    }
+
+    public function setDescriptif(?string $descriptif): self
+    {
+        $this->descriptif = $descriptif;
 
         return $this;
     }

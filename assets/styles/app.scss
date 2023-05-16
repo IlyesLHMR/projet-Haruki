@@ -1,0 +1,12 @@
+@import url(components/global.scss);
+@import url(components/footer.css);
+@import url(components/navbar.css);
+@import url(components/serieListe.css);
+@import url(components/membreProfil.css);
+
+
+$theme-colors: (
+    "primary": pink,
+
+);
+@import "./node_modules/bootstrap/scss/bootstrap.scss";

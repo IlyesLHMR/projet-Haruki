@@ -157,4 +157,24 @@ class Manga
     {
         $this->slug = $slugger->slug($this->getImageCover())->lower();
     }
+
+    public function __toString():string{
+        return (string) $this->numero_tome ;
+    }
+
+	/**
+	 * @return mixed
+	 */
+	public function getImage_cover() {
+		return $this->image_cover;
+	}
+	
+	/**
+	 * @param mixed $image_cover 
+	 * @return self
+	 */
+	public function setImage_cover($image_cover): self {
+		$this->image_cover = $image_cover;
+		return $this;
+	}
 }

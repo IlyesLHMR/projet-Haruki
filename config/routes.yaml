@@ -10,9 +10,14 @@ app_home: # Page Accueil
   controller: App\Controller\HomeController::index
 
 #  Page de la bibliotheque
-app_bibliotheque:
+app_bibliotheque:    # Liste des séries 
   path: /bibliotheque
   controller: App\Controller\BibliothequeController::index
+
+app_detail_serie:  # Liste détaillé des mangas par série
+  path: /bibliotheque/{id}
+  controller: App\Controller\BibliothequeController::detail
+
 
 # Back Office Admin
 app_admin:
