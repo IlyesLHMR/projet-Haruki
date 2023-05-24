@@ -3,10 +3,10 @@
 @import url(components/navbar.css);
 @import url(components/serieListe.css);
 @import url(components/membreProfil.css);
+@import url(components/pagination.css);
 
 
 $theme-colors: (
     "primary": pink,
-
 );
 @import "./node_modules/bootstrap/scss/bootstrap.scss";

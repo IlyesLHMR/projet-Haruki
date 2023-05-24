@@ -39,6 +39,17 @@ class SerieRepository extends ServiceEntityRepository
         }
     }
 
+//  Trouver un manga par rapport à la série de l'id.
+    public function findMangasBySerie(Serie $serie)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.manga', 'm') // Assurez-vous que le nom de la relation entre Serie et Manga est correct (ici, 'mangas')
+            ->where('s.id = :serieId')
+            ->setParameter('serieId', $serie->getId())
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Serie[] Returns an array of Serie objects
 //     */
