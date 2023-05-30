@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ListeDeLecture;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,14 +14,16 @@ class ListeDeLectureType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('manga')
-        ;
+            ->add('user', HiddenType::class, [
+                'data' => $options['userInfo']->getId(),
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ListeDeLecture::class,
+            'userInfo' => null,
         ]);
     }
 }

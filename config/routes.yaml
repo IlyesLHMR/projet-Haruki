@@ -30,12 +30,18 @@ app_admin_member_management:
 
 # Back Office Member
 app_member:
-  path: member/profile
+  path: /member/profile
   controller: App\Controller\MembreController::index
 
 app_member_readList:
   path: member/readList
   controller: App\Controller\MembreController::readList
+
+app_member_createList:
+  path: /member/createList
+  controller: App\Controller\MembreController::createList
+  methods: [GET, POST]
+
 
 
 # Login / Logout

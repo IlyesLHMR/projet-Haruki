@@ -13,15 +13,13 @@ class ListeDeLecture
     #[ORM\Column(type: 'integer')]
     private $id = null;
 
-    #[ORM\Column(type: 'boolean',nullable: false)]
-    private $lu = null;
 
     #[ORM\ManyToOne(inversedBy: 'liste_lecture')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'listeDeLectures')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Manga $manga = null;
 
     #[ORM\Column(length: 255)]
@@ -30,18 +28,6 @@ class ListeDeLecture
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function isLu(): ?bool
-    {
-        return $this->lu;
-    }
-
-    public function setLu(bool $lu): self
-    {
-        $this->lu = $lu;
-
-        return $this;
     }
 
     public function getUser(): ?User

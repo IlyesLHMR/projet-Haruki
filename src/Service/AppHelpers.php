@@ -28,23 +28,27 @@ class AppHelpers
 
   public function getUser()
   {
-    $user = $this->security->getUser();
-    if ($user) {
-      $isLoggedIn = true;
-    } else {
-      $isLoggedIn = false;
-    }
-    if ($this->security->isGranted('ROLE_ADMIN')) {
-      $isAdmin = true;
-    } else {
-      $isAdmin = false;
-    }
-    $userObj = new stdClass();
-    $userObj->user = $user;
-    $userObj->isAdmin = $isAdmin;
-    $userObj->isLoggedIn = $isLoggedIn;
-    return $userObj;
+      $user = $this->security->getUser();
+      if ($user) {
+          $isLoggedIn = true;
+      } else {
+          $isLoggedIn = false;
+      }
+      if ($this->security->isGranted('ROLE_ADMIN')) {
+          $isAdmin = true;
+      } else {
+          $isAdmin = false;
+      }
+      $userObj = new \stdClass();
+      $userObj->user = $user;
+      $userObj->isAdmin = $isAdmin;
+      $userObj->isLoggedIn = $isLoggedIn;
+      return $userObj;
   }
+  
+  
+  
+
 
   public function getBodyId(string $page): string
   {

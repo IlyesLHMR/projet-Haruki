@@ -3,11 +3,12 @@
 {% block contentFullWidth %}
 
   <div class="d-flex justify-content-center mt-4">
-    <h3>Créez une nouvelle liste de lecture:</h3>
+    <p>Créez une nouvelle liste de lecture:</p>
   </div>
-  
-  <div>
-    {{form(form)}}
-  </div>
+
+<div class="d-flex justify-content-center mb-4 mt-2">
+    <a href="{{ path('app_member_createList') }}" class="btn btn-primary">Créer</a>
+</div>
+
   
 {% endblock %} 

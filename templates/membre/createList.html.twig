@@ -1,0 +1,25 @@
+{# {% extends 'layout-full-width.html.twig' %}
+
+{% block contentFullWidth %}
+
+{{ form_start(form, {'action': path('app_member_createList')}) }}
+{{ form_row(form.titre) }}
+{{ form_row(form.user) }}
+{{ form_widget(form.submit) }}
+{{ form_end(form) }}
+
+
+{% endblock %}  #}
+
+{% extends 'layout-full-width.html.twig' %}
+
+{% block contentFullWidth %}
+
+<div class="container">
+    {{ form_start(form, {'action': path('app_member_createList')}) }}
+    {{ form_row(form.titre) }}
+    {{ form_row(form.user) }}
+    <button type="submit" class="btn btn-primary mb-4">Créer la liste</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
