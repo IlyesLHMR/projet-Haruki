@@ -10,5 +10,20 @@
     <a href="{{ path('app_member_createList') }}" class="btn btn-primary">Créer</a>
 </div>
 
+<h1>Listes de lectures</h1>
+
+    {% if listes is not empty %}
+            {% for liste in listes %}
+              <div class="container m-3"> <h4>{{ liste.titre }}</h4></div>
+              <div class="container">
+                <a href="{{ path('app_member_editList', { id: liste.id }) }}" class="btn btn-primary mb-2">modifier</a>
+                <a href="{{ path('app_member_deleteList', { id: liste.id }) }}" class="btn btn-danger mb-2">Supprimer</a>
+              </div>
+            {% endfor %}
+    {% else %}
+        <p>Aucune liste de lecture disponible</p>
+
+    {% endif %}
+
   
 {% endblock %} 

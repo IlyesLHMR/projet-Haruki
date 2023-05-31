@@ -42,6 +42,15 @@ app_member_createList:
   controller: App\Controller\MembreController::createList
   methods: [GET, POST]
 
+app_member_editList:
+  path: /member/editList/{id}
+  controller: App\Controller\MembreController::editList
+  methods: [GET, POST]
+
+app_member_deleteList:
+  path: /member/deleteList/{id}
+  controller: App\Controller\MembreController::deleteList
+  methods: [GET, POST]
 
 
 # Login / Logout

@@ -13,17 +13,18 @@ class ListeDeLectureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre')
-            ->add('user', HiddenType::class, [
-                'data' => $options['userInfo']->getId(),
-            ]);
+            ->add('titre');
+            // Pas besoin de mettre l'id user, il est toujours disponible !!!!!
+            // ->add('user', HiddenType::class, [
+            //     'data' => $options['userInfo']->getId(),
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ListeDeLecture::class,
-            'userInfo' => null,
+            // 'userInfo' => null,
         ]);
     }
 }

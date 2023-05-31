@@ -2,15 +2,14 @@
 
 {% block contentFullWidth %}
 <div class="container m-4">
-    <h1>Création d'une liste de lecture: </h1>
+    <h1>Modifier liste de lecture:</h1>
 </div>
 
 <div class="container">
-    {{ form_start(form, {'action': path('app_member_createList')}) }}
+    {{ form_start(form, {'action': path('app_member_editList', { id: liste.id }) }) }}
     {{ form_row(form.titre) }}
     {# {{ form_row(form.user) }} #}
-    <button type="submit" class="btn btn-primary mb-4">Créer la liste</button>
+    <button type="submit" class="btn btn-primary mb-4">Modifier la liste</button>
     {{ form_end(form) }}
 </div>
 {% endblock %}
-
