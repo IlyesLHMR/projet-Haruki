@@ -52,7 +52,6 @@ app_member_deleteList:
   controller: App\Controller\MembreController::deleteList
   methods: [GET, POST]
 
-
 # Login / Logout
 app_login:
   path: /login

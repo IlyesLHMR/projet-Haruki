@@ -40,9 +40,13 @@ class Serie
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $descriptif = null;
 
+    #[ORM\ManyToMany(targetEntity: ListeDeLecture::class, mappedBy: 'serie')]
+    private Collection $listeDeLectures;
+
     public function __construct()
     {
         $this->manga = new ArrayCollection();
+        $this->listeDeLectures = new ArrayCollection();
     }
 
     public function __toString()
@@ -165,6 +169,33 @@ class Serie
     public function setDescriptif(?string $descriptif): self
     {
         $this->descriptif = $descriptif;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ListeDeLecture>
+     */
+    public function getListeDeLectures(): Collection
+    {
+        return $this->listeDeLectures;
+    }
+
+    public function addListeDeLecture(ListeDeLecture $listeDeLecture): self
+    {
+        if (!$this->listeDeLectures->contains($listeDeLecture)) {
+            $this->listeDeLectures->add($listeDeLecture);
+            $listeDeLecture->addSerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListeDeLecture(ListeDeLecture $listeDeLecture): self
+    {
+        if ($this->listeDeLectures->removeElement($listeDeLecture)) {
+            $listeDeLecture->removeSerie($this);
+        }
 
         return $this;
     }

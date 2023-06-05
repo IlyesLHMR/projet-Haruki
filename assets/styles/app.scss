@@ -2,6 +2,7 @@
 @import url(components/footer.css);
 @import url(components/navbar.css);
 @import url(components/serieListe.css);
+@import url(components/favoris-list.css);
 @import url(components/membreProfil.css);
 @import url(components/pagination.css);
 
@@ -9,5 +10,16 @@
 $theme-colors: (
     "primary": pink,
     "danger": red,
+    "light" : black,
 );
+
+// Importez le reste de Bootstrap pour appliquer les styles
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+// Modifiez les variables spécifiques aux boutons Bootstrap
+$btn-primary-color: black; // Couleur du texte du bouton (noir)
+$btn-primary-bg: white; // Couleur de fond du bouton (blanc)
+$btn-primary-hover-bg: gray; // Couleur de fond du bouton lors du survol (gris)
+$btn-primary-active-bg: lightgray; // Couleur de fond du bouton lors du clic (gris clair)
+
 @import "./node_modules/bootstrap/scss/bootstrap.scss";

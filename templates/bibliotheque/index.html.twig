@@ -6,8 +6,38 @@
     <h3>Découvrez toutes nos références de manga:</h3>
 </div>
 
+<section class="col-12 row-5">
+    <div class="book-list d-flex justify-content-center">
 
-{% include "template-parts/serieListe.html.twig" %}
+        {% for serie in series %}
+            <div class="container zoom d-flex justify-content-center">
+                <div class="bookCard">
+                    <a class="card" href="{{path('app_detail_serie', {id:serie.id})}}"> {# Ici j'appelle la page de détail de la série qui affiche les entité manga#}
+                        <img style="" src="{{ asset('assets/img/uploaded/' ~ serie.coverSerie()) }}" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ serie.nomSerie }}</h5>
+                            <p class="card-text">{{ serie.nbDeTomes }} tomes</p>
+                        </div>
+                        <button class="btn btn-outline-light mb-2">Ajouter à une liste</button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+
+        {# display navigation PAGINATION #}
+    <div class= "container d-flex justify-content-center">
+        <div class="navigation">
+            {{ knp_pagination_render(series) }}
+        </div>
+    </div>
+
+
+
+
 
 
 

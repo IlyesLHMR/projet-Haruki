@@ -12,14 +12,30 @@
 
 <h1>Listes de lectures</h1>
 
+
     {% if listes is not empty %}
-            {% for liste in listes %}
-              <div class="container m-3"> <h4>{{ liste.titre }}</h4></div>
+      {% for liste in listes %}
+        <div class="container limit-fav">
+            <div class="container m-3"> <h4>{{ liste.titre }}</h4></div>
               <div class="container">
                 <a href="{{ path('app_member_editList', { id: liste.id }) }}" class="btn btn-primary mb-2">modifier</a>
                 <a href="{{ path('app_member_deleteList', { id: liste.id }) }}" class="btn btn-danger mb-2">Supprimer</a>
-              </div>
-            {% endfor %}
+                <hr>
+                  <div class="container zoom d-flex justify-content">
+                  <div class="bookCard">
+                    <a class="card" href="">
+                      <img style="" src="" alt="">
+                      <div class="card-body">
+                          <h5 class="card-title"></h5>
+                          <p class="card-text"></p>
+                      </div>
+                    </a>
+                  </div>
+                <hr>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     {% else %}
         <p>Aucune liste de lecture disponible</p>
 

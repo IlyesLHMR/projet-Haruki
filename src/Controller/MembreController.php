@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Serie;
 use App\Entity\ListeDeLecture;
 use App\Form\ListeDeLectureType;
 use App\Repository\ListeDeLectureRepository;
@@ -119,5 +120,5 @@ class MembreController extends AbstractController
         return $this->redirectToRoute('app_member_readList');
     }
 
-    
+
 }
