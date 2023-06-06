@@ -32,4 +32,17 @@ class HomeController extends AbstractController
             'bodyId' => $this->bodyId,
         ]);
     }
+
+    public function  cgu(): Response
+    {
+        return $this->render('cgu.html.twig', [
+            'userInfo' => $this->userInfo,
+        ]);
+    }
+    public function  privacyPolicy(): Response
+    {
+        return $this->render('privacy-policy.html.twig', [
+            'userInfo' => $this->userInfo,
+        ]);
+    }
 }

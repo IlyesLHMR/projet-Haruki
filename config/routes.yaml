@@ -9,6 +9,15 @@ app_home: # Page Accueil
   path: /
   controller: App\Controller\HomeController::index
 
+app_cgu:
+  path: /cgu
+  controller: App\Controller\HomeController::cgu
+
+app_privacyPolicy:
+  path: /privacy-policy
+  controller: App\Controller\HomeController::privacyPolicy
+
+  
 #  Page de la bibliotheque
 app_bibliotheque:    # Liste des séries 
   path: /bibliotheque

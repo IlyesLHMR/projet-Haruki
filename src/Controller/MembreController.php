@@ -78,9 +78,9 @@ class MembreController extends AbstractController
 
 
     // Cette fonction permet de modifier une liste de lecture.
-    public function editList(ListeDeLecture $liste, Request $request):Response
+    public function editList(int $id, ListeDeLecture $liste, Request $request):Response
     {
-        // dd($liste);
+        $serieRepo = $this->db->getRepository(Serie::class)->findBy(['id' => $id]);
         $form = $this->createForm(ListeDeLectureType::class, $liste);
 
         $form->handleRequest($request);
@@ -101,24 +101,20 @@ class MembreController extends AbstractController
             'userInfo' => $this->userInfo,
             'form' => $form->createView(),
             'liste' => $liste,
+            'serie' =>$serieRepo,
+            // 'mangas' =>$mangaRepo,
         ]);
     }
 
     
     public function deleteList(ListeDeLecture $liste): Response
     {
-        // Vérifier si l'utilisateur connecté est autorisé à supprimer cette liste de lecture
-        // Par exemple, vous pouvez vérifier si l'utilisateur connecté est le propriétaire de la liste de lecture
-
-        // Supprimer la liste de lecture
+        
         $entityManager = $this->db;
         $entityManager->remove($liste);
         $entityManager->flush();
 
-        // Rediriger ou effectuer toute autre action nécessaire après la suppression de la liste de lecture
-        // Par exemple, vous pouvez rediriger vers la page de lecture des listes de l'utilisateur
         return $this->redirectToRoute('app_member_readList');
     }
-
 
 }

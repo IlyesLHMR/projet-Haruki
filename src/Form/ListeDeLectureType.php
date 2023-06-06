@@ -6,6 +6,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use app\Entity\Serie;
 use App\Entity\ListeDeLecture;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,11 +16,8 @@ class ListeDeLectureType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('nom_serie', EntityType::class, [
-                'class' => Serie::class,
-                'choice_label' => 'nom_serie',
-            ])
-            ;
+            ->add('serie');
+            
             
     }
 
