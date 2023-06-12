@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Serie;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Serie>
@@ -49,6 +50,17 @@ class SerieRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+// récupère les listes de lecture de l'utilisateur à partir de ListeDeLectureRepository, puis utilise SerieRepository pour récupérer les séries associées à ces listes de lecture
+    public function findSeriesByUser(User $user): array
+{
+    return $this->createQueryBuilder('serie')
+        ->join('serie.listeDeLectures', 'liste')
+        ->where('liste.user = :user')
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getResult();
+}
 
 //    /**
 //     * @return Serie[] Returns an array of Serie objects

@@ -3,16 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Serie;
+use App\Service\AppHelpers;
 use App\Entity\ListeDeLecture;
 use App\Form\ListeDeLectureType;
-use App\Repository\ListeDeLectureRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use App\Service\AppHelpers;
+use App\Repository\MangaRepository;
+use App\Repository\SerieRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\ListeDeLectureRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class MembreController extends AbstractController
@@ -39,13 +41,17 @@ class MembreController extends AbstractController
         ]);
     }
 
-    public function readList(ListeDeLectureRepository $listeRepo): Response
+    public function readList(ListeDeLectureRepository $listeRepo, SerieRepository $serieRepo): Response
     {  
+        
         $user = $this->getUser(); // Récupérer l'utilisateur actuellement connecté
         $listeRepo = $this->db->getRepository(ListeDeLecture::class)->findBy(['user' => $user]);
+        $series = $serieRepo->findSeriesByUser($user);
+        
 
         return $this->render('membre/readList.html.twig', [
             'listes' => $listeRepo,
+            'series' => $series,
             'userInfo' => $this->userInfo,
             'bodyId' => $this->app->getBodyId('MEMBER_PAGE'),
         ]);
@@ -60,6 +66,7 @@ class MembreController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {    
+            
 
             $ListeDeLecture->setUser($this->userInfo->user);
             // Enregistre la liste de lecture en base de données
@@ -67,7 +74,7 @@ class MembreController extends AbstractController
             $entityManager->persist($ListeDeLecture);
             $entityManager->flush();
     
-            // Redirige ou effectue toute autre action nécessaire après la création de la liste de lecture
+            // Redirige après la création de la liste de lecture
             return $this->redirectToRoute('app_member_readList');
         }
         return $this->render('membre/createList.html.twig', [
@@ -93,7 +100,7 @@ class MembreController extends AbstractController
             $entityManager->persist($liste);
             $entityManager->flush();
     
-            // Redirige ou effectue toute autre action nécessaire après la création de la liste de lecture
+            // Redirige après la modification de la liste de lecture
             return $this->redirectToRoute('app_member_readList');
         }
 
