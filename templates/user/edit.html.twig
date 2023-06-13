@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte-modification | Haruki{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{  message }}
+        </div>
+    {% endfor %}
+
+    <div class="container">
+        <h1 class ='m-4'>Modification de ...</h1>
+    </div>
+
+    <div class="container">
+        {{form(form)}}
+    </div>
+
+{% endblock %}
