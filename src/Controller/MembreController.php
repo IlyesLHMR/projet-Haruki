@@ -80,6 +80,7 @@ class MembreController extends AbstractController
     public function editList(int $id, ListeDeLecture $liste, Request $request):Response
     {
         $serieRepo = $this->db->getRepository(Serie::class)->findBy(['id' => $id]);
+        
         $form = $this->createForm(ListeDeLectureType::class, $liste);
 
         $form->handleRequest($request);

@@ -17,13 +17,13 @@ class ListeDeLectureType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('serie');
-            // ->add('submit', SubmitType::class, [
-            //     'attr' => [
-            //         'class' => 'btn btn-primary m-4'
-            //     ],
-            //     'label' => 'Créer la liste'
-            // ]);
+            ->add('series', EntityType::class, [
+                "mapped" =>false,
+                'class' => Serie::class,
+                'choice_label' => 'nomSerie',
+                'expanded' => true,
+                "multiple" => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
