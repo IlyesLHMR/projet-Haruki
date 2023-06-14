@@ -38,9 +38,9 @@ app_admin_member_management:
   controller: App\Controller\AdminController::memberManagement
 
 # Back Office Member
-app_member:
-  path: /member/profile
-  controller: App\Controller\MembreController::index
+app_user:
+  path: /user/profil
+  controller: App\Controller\UserController::index
 
 app_member_readList:
   path: member/readList

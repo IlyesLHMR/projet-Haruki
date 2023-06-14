@@ -32,14 +32,6 @@ class MembreController extends AbstractController
         $this->session = $requestStack->getSession();
     }
 
-    // Page d'accueil des membres connectés
-    public function index(): Response
-    {
-        return $this->render('membre/index.html.twig', [
-            'userInfo' => $this->userInfo,
-            'bodyId' => $this->app->getBodyId('MEMBER_PAGE'),
-        ]);
-    }
 
     public function readList(ListeDeLectureRepository $listeRepo, SerieRepository $serieRepo): Response
     {  

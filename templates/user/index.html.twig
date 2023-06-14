@@ -5,13 +5,12 @@
 <div class="member-page-container">
 	<div class="general-setting">
 		<ul>
+			<li><a href="#">Mon abonnement</a></li>
+			<li><a href="#">Changer l'adresse email</a></li>
+			<li><a href="{{ path('app_user_edit_password', {'id': userInfo.id}) }}">Changer le mot de passe</a></li>
 
-			<li><a href="#"></a>Mon abonnement</li>
-			<li><a href="#"></a>Changer l'adresse email</li>
-			<li><a href="#"></a>Changer le mot de passe</li>
 		</ul>
 	</div>
-
 	<div class="affichageSetting"></div>
 </div>	
 {% endblock %}

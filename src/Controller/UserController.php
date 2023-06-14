@@ -29,47 +29,59 @@ class UserController extends AbstractController
         $this->session = $requestStack->getSession();
     }
 
-    #[Route('/utilisateur/edition/{id}', name: 'app_user_edit')]
-    public function index(Request $request, User $user): Response
+     // Page d'accueil des membres connectés
+     public function index(): Response
+     {
+         return $this->render('user/index.html.twig', [
+             'userInfo' => $this->userInfo,
+             'bodyId' => $this->app->getBodyId('MEMBER_PAGE'),
+         ]);
+     }
+
+// #[Route('/utilisateur/edition-email/{id}', name: 'app_user_edit')]
+//     public function editEmail(Request $request, User $user): Response
+//     {
+//         if(!$this->getUser()) {
+//             return $this->redirectToRoute('app_login');
+//         }
+
+//         if ($this->getUser() !== $user) {
+//             return $this->redirectToRoute('app_home');
+//         }
+
+//         $form = $this->createForm(UserType::class, $user);
+
+//         $form->handleRequest($request);
+
+//         if ($form->isSubmitted() && $form->isValid()) {
+//             $user = $form->getData();
+
+//             $entityManager = $this->db;
+//             $entityManager->persist($user);
+//             $entityManager->flush();
+
+//             $this->addFlash(
+//                 'success',
+//                 'Vos informations ont été mises à jour avec succès'
+//             );
+//             return $this->redirectToRoute('app_member');
+//         }
+
+//         return $this->render('user/edit.html.twig', [
+//             'form' => $form->createView(),
+//             'userInfo' => $this->userInfo,
+//         ]);
+//     }
+
+#[Route('/utilisateur/edition-password/{id}', name: 'app_user_edit_password', methods: ['GET', 'POST'])]
+    public function editPassword($id, User $user, Request $request, UserPasswordHasherInterface $hasher): Response
     {
-        if(!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        }
+        $userRepo = $this->db->getRepository(User::class)->findOneBy(['id' => $id]);
 
-        if ($this->getUser() !== $user) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        $form = $this->createForm(UserType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-
-            $entityManager = $this->db;
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash(
-                'success',
-                'Vos informations ont été mises à jour avec succès'
-            );
-            return $this->redirectToRoute('app_member');
-        }
-
-        return $this->render('user/edit.html.twig', [
-            'form' => $form->createView(),
-            'userInfo' => $this->userInfo,
-        ]);
-    }
-
-    #[Route('/utilisateur/edition-password/{id}', name: 'app_user_edit_password', methods: ['GET', 'POST'])]
-    public function editPassword(User $user, Request $request, UserPasswordHasherInterface $hasher): Response
-    {
         $form = $this->createForm(UserPasswordType::class);
 
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -102,7 +114,11 @@ class UserController extends AbstractController
 
         return $this->render('user/editPassword.html.twig', [
             'form' => $form->createView(),
-            'userInfo' => $this->userInfo
+            'userInfo' => $this->userInfo,
+            'user' => $userRepo,
         ]);
     }
+
+
+
 }
