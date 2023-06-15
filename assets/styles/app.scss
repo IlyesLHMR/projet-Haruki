@@ -5,12 +5,14 @@
 @import url(components/favoris-list.css);
 @import url(components/membreProfil.css);
 @import url(components/pagination.css);
+@import url(components/homePage.css);
+
 
 
 $theme-colors: (
     "primary": pink,
     "danger": red,
-    "light" : black,
+    "light" : rgb(228, 206, 210),
 );
 
 // Importez le reste de Bootstrap pour appliquer les styles

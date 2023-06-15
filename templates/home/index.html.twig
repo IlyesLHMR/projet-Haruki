@@ -5,13 +5,55 @@
 {% endblock %}
 	
 {% block contentFullWidth %}
-<div class="call_to_action">
-    <h1>Manga café Haruki</h1>
-    
-    <p>Plongez dans l'univers captivant des mangas tout en sirotant votre boisson préférée.
-    Rejoignez Haruki et découvrez une expérience de lecture unique en son genre !</p>
+    <div class="first-title bg-primary text-dark py-5">
+        <div class="container">
+            <h1 class="text-center">Manga café Haruki</h1>
+        </div>
+    </div>
+    <section class="hero bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-4">Plongez dans l'univers captivant des mangas tout en sirotant votre boisson préférée.</h2>
+                    <p>Rejoignez Haruki et découvrez une expérience de lecture unique en son genre !</p>
+                    <a href="inscription.html" class="btn btn-primary mt-3">Inscrivez-vous</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ asset('assets/img/background-accueil.png') }}" alt="Manga Café" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="articles bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Derniers articles</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="article1.jpg" alt="Article 1" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Titre de l'article 1</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <a href="#" class="btn btn-primary">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </section>
+    <section class="concept bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Le concept du manga café</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="concept-image.jpg" alt="Concept du Manga Café" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <p>Le manga café est un lieu où les amateurs de mangas peuvent se retrouver pour lire, discuter et se plonger dans l'univers des mangas tout en profitant d'une boisson chaude ou froide. Chez Haruki, nous offrons une vaste sélection de mangas dans une atmosphère chaleureuse et accueillante.</p>
+                    <p>Venez vivre une expérience immersive avec nos sélections de mangas populaires, des événements spéciaux et des espaces confortables pour vous plonger dans vos histoires préférées.</p>
+                    <a href="about.html" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <button class="btn btn-ilyes">Inscrivez vous</button>
-    
-</div>
 {% endblock %}
