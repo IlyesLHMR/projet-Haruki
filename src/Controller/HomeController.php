@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\AppHelpers;
@@ -25,11 +27,14 @@ class HomeController extends AbstractController
         $this->session = $requestStack->getSession();
     }
 
-    public function index(): Response
+    public function index(ArticleRepository $articleRepo): Response
     {
+        $articleRepo = $this->db->getRepository(Article::class)->findAll();
+
         return $this->render('home/index.html.twig', [
             'userInfo' => $this->userInfo,
             'bodyId' => $this->bodyId,
+            'articles' => $articleRepo
         ]);
     }
 

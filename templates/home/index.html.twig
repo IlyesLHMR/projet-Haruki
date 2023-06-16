@@ -27,15 +27,19 @@
     <section class="articles bg-light py-5">
         <div class="container">
             <h2 class="text-center mb-4">Derniers articles</h2>
+            <hr>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <img src="article1.jpg" alt="Article 1" class="card-img-top">
+                    {% for article in articles %}
+                        <img src={{ asset('assets/img/article/' ~ article.image()) }} alt="Article" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">Titre de l'article 1</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <a href="#" class="btn btn-primary">Lire la suite</a>
+                            <h5 class="card-title">{{ article.titre }}</h5>
+                            <p class="card-text">{{ article.contenu }}</p>
+                           <div class="text-center"><a href="#" class="btn btn-primary">Lire la suite</a></div> 
+                           {# <div class="text-center">{{ article.date_publication }}</div> #}
                         </div>
+                    {% endfor %}
                     </div>
                 </div>
             </div>
