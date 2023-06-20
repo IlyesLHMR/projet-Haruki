@@ -4,6 +4,8 @@
 {% endblock %}
 
 {% block contentFullWidth %}
+
+<div class="conteneur-form">
 	<form method="post">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -42,7 +44,8 @@
 		</button>
 
 	</form>
-	
 	<a href="{{ path('forgotten_password') }}" ><button class="btn btn-lg btn-primary m-2"> Mot de passe oublié</button></a>
+	
+</div>
 
 {% endblock %}
