@@ -38,83 +38,9 @@ class UserController extends AbstractController
          ]);
      }
 
-    // #[Route('/utilisateur/edition-email/{id}', name: 'app_user_edit')]
-    // public function editEmail(Request $request, User $user): Response
-    // {
-    //     if(!$this->getUser()) {
-    //         return $this->redirectToRoute('app_login');
-    //     }
 
-    //     if ($this->getUser() !== $user) {
-    //         return $this->redirectToRoute('app_home');
-    //     }
 
-    //     $form = $this->createForm(UserType::class, $user);
 
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $user = $form->getData();
-
-    //         $entityManager = $this->db;
-    //         $entityManager->persist($user);
-    //         $entityManager->flush();
-
-    //         $this->addFlash(
-    //             'success',
-    //             'Vos informations ont été mises à jour avec succès'
-    //         );
-    //         return $this->redirectToRoute('app_member');
-    //     }
-
-    //     return $this->render('user/edit.html.twig', [
-    //         'form' => $form->createView(),
-    //         'userInfo' => $this->userInfo,
-    //     ]);
-    // }
-
-    #[Route('/utilisateur/edition-password/{id}', name: 'app_user_edit_password', methods: ['GET', 'POST'])]
-    public function editPassword(User $user, Request $request, UserPasswordHasherInterface $hasher): Response
-    {
-        
-        $form = $this->createForm(UserPasswordType::class);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            if ($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) 
-            {
-                $user->setPassword(
-                    $hasher->hashPassword(
-                        $user,
-                        $form->getData()['newPassword']
-                    )
-                );
-
-                $entityManager = $this->db;
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-                $this->addFlash(
-                    'success',
-                    'Le mot de passe a été modifié avec succès.'
-                );
-
-                return $this->redirectToRoute('app_member');
-            } else {
-                $this->addFlash(
-                    'warning',
-                    'Le mot de passe renseigné est incorrect.'
-                );
-            }
-        }
-
-        return $this->render('user/editPassword.html.twig', [
-            'form' => $form->createView(),
-            'userInfo' => $this->userInfo
-        ]);
-    }
 
 
 
