@@ -87,16 +87,20 @@ class SecurityController extends AbstractController
                 ->from(('Admin@Haruki-concept.com'))
                 ->to($user->getEmail())
                 ->htmlTemplate('emails/reset_password.html.twig')
+                ->context([
+                    'url' => $url,
+                    'user' => $user,
+                ])
                 ;
         
             $mailer->send($email);
 
             $this->addFlash(
                 'success',
-                'Votre demande a bien été envoyée'
+                'Votre demande de réinitialisation a bien été envoyée'
             );
 
-                $this->addFlash('success', 'Email envoyé avec succès');
+                $this->addFlash('success', 'Demande envoyée avec succès');
                 return $this->redirectToRoute('app_login');
             }
             // $user est null
