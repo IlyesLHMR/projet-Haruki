@@ -6,6 +6,7 @@ use App\Service\AppHelpers;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ResetPasswordRequestFormType;
+use App\Form\ResetPasswordFormType;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -153,7 +154,8 @@ class SecurityController extends AbstractController
             }
 
             return $this->render('security/reset_password.html.twig', [
-                'passForm' => $form->createView()
+                'passForm' => $form->createView(),
+                'userInfo' => $this->userInfo, 
             ]);
         }
         
