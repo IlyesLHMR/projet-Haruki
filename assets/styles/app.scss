@@ -4,10 +4,9 @@
 @import url(components/serieListe.css);
 @import url(components/favoris-list.css);
 @import url(components/membreProfil.css);
-@import url(components/pagination.css);
+@import url(components/pagination.scss); // modifié de css à scss
+@import url(components/liste-de-lecture.scss);
 @import url(components/homePage.css);
-@import url(components/conteneur-form.css);
-@import url(components/error-page404.css);
 
 
 

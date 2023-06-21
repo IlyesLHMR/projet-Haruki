@@ -12,13 +12,15 @@
         {% for serie in series %}
             <div class="container zoom d-flex justify-content-center">
                 <div class="bookCard">
-                    <a class="card" href="{{path('app_detail_serie', {id:serie.id})}}"> {# Ici j'appelle la page de détail de la série qui affiche les entité manga#}
+                    <a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}"> {# Ici j'appelle la page de détail de la série qui affiche les entité manga#}
                         <img style="" src="{{ asset('assets/img/uploaded/' ~ serie.coverSerie()) }}" alt="">
                         <div class="card-body">
-                            <h5 class="card-title">{{ serie.nomSerie }}</h5>
+                            <h5 class="card-title border-bottom border-1 border-danger">{{ serie.nomSerie }}</h5>
+                            <p class="card-text"><em>ed. {{ serie.editeur }}</em></p>
                             <p class="card-text">{{ serie.nbDeTomes }} tomes</p>
+                            
                         </div>
-                        <button class="btn btn-outline-light mb-2">Ajouter à une liste</button>
+                        <button class="btn btn-outline-light mb-2" style="z-index:10">Ajouter à une liste</button>
                     </a>
                 </div>
             </div>
@@ -34,12 +36,5 @@
             {{ knp_pagination_render(series) }}
         </div>
     </div>
-
-
-
-
-
-
-
 
 {% endblock %}

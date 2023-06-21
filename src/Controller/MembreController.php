@@ -33,39 +33,43 @@ class MembreController extends AbstractController
     }
 
 
-    public function readList(ListeDeLectureRepository $listeRepo, SerieRepository $serieRepo): Response
-    {  
-        
-        $user = $this->getUser(); // Récupérer l'utilisateur actuellement connecté
-        $listeRepo = $this->db->getRepository(ListeDeLecture::class)->findBy(['user' => $user]);
-        $series = $serieRepo->findSeriesByUser($user);
-        
+    public function readList(ListeDeLectureRepository $listeRepo, SerieRepository $serieRepo, AppHelpers $app): Response
+    {
+
+        $user = $app->getUser()->user; // Récupérer l'utilisateur actuellement connecté
+        $liste = $user->getListeLecture();
 
         return $this->render('membre/readList.html.twig', [
-            'listes' => $listeRepo,
-            'series' => $series,
+            'listes' => $liste,
             'userInfo' => $this->userInfo,
             'bodyId' => $this->app->getBodyId('MEMBER_PAGE'),
         ]);
     }
 
-    
-    public function createList(Request $request):Response
-    {
-        $ListeDeLecture = new ListeDeLecture();    
-        $form = $this->createForm(ListeDeLectureType::class, $ListeDeLecture);
-        // dd($form);
-        $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {    
-            
 
-            $ListeDeLecture->setUser($this->userInfo->user);
+    public function createList(Request $request): Response
+    {
+        $listeDeLecture = new ListeDeLecture();
+
+        $form = $this->createForm(ListeDeLectureType::class, $listeDeLecture);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $liste = $form->getData();
+
+            $formData = $form->get('series')->getData();
+
+            foreach ($formData as $serie) {
+                $liste->addSerie($serie);
+            }
+
+            $listeDeLecture->setUser($this->userInfo->user);
             // Enregistre la liste de lecture en base de données
             $entityManager = $this->db;
-            $entityManager->persist($ListeDeLecture);
+            $entityManager->persist($listeDeLecture);
             $entityManager->flush();
-    
+
             // Redirige après la création de la liste de lecture
             return $this->redirectToRoute('app_member_readList');
         }
@@ -77,44 +81,48 @@ class MembreController extends AbstractController
 
 
     // Cette fonction permet de modifier une liste de lecture.
-    public function editList(int $id, ListeDeLecture $liste, Request $request):Response
+    public function editList(int $id, ListeDeLecture $liste, Request $request): Response
     {
-        $serieRepo = $this->db->getRepository(Serie::class)->findBy(['id' => $id]);
-        
         $form = $this->createForm(ListeDeLectureType::class, $liste);
 
         $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {    
 
-            // $liste->setUser($this->userInfo->user);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $liste = $form->getData();
+            $liste->emptySeries();
+            
+            $formData = $form->get('series')->getData();
+
+            foreach ($formData as $serie) {
+                $liste->addSerie($serie);
+            }
+
+            $liste->setUser($this->userInfo->user);
             // Enregistre la liste de lecture en base de données
             $entityManager = $this->db;
+            
             $entityManager->persist($liste);
             $entityManager->flush();
-    
+
             // Redirige après la modification de la liste de lecture
             return $this->redirectToRoute('app_member_readList');
         }
 
-        return $this->render('membre/editList.html.twig',[
+        return $this->render('membre/editList.html.twig', [
             'userInfo' => $this->userInfo,
-            'form' => $form->createView(),
+            'form' => $form,
             'liste' => $liste,
-            'serie' =>$serieRepo,
-            // 'mangas' =>$mangaRepo,
         ]);
     }
 
-    
+
     public function deleteList(ListeDeLecture $liste): Response
     {
-        
+
         $entityManager = $this->db;
         $entityManager->remove($liste);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_member_readList');
     }
-
 }

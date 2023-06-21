@@ -1,0 +1,14 @@
+.page-link.active, .active > .page-link {
+    --bs-pagination-active-bg: rgb(253, 209, 216);
+    --bs-pagination-active-border-color: rgb(254, 226, 231);
+    --bs-pagination-active-color: rgb(251, 121, 7);
+  }
+  
+  .page-link {
+    --bs-pagination-color:rgb(72, 3, 75);
+  }
+  
+  .page-link:hover {
+    --bs-pagination-hover-color:rgb(251, 121, 7);
+  }
+  
