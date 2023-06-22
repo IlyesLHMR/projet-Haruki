@@ -1,23 +1,24 @@
-@import url(components/global.scss);
-@import url(components/footer.css);
-@import url(components/navbar.css);
-@import url(components/serieListe.css);
-@import url(components/favoris-list.css);
-@import url(components/membreProfil.css);
-@import url(components/pagination.scss); // modifié de css à scss
-@import url(components/liste-de-lecture.scss);
-@import url(components/homePage.css);
+// Importez les fichiers SCSS nécessaires
+@import "components/global";
+@import "components/footer";
+@import "components/navbar";
+@import "components/serieListe";
+@import "components/favoris-list";
+@import "components/membreProfil";
+@import "components/pagination";
+@import "components/liste-de-lecture";
+@import "components/homePage";
+@import "components/manga-list";
 
-
-
+// Définissez vos variables personnalisées
 $theme-colors: (
-    "primary": pink,
-    "danger": red,
-    "light" : rgb(228, 206, 210),
+  "primary": pink,
+  "danger": red,
+  "light": rgb(228, 206, 210),
 );
 
 // Importez le reste de Bootstrap pour appliquer les styles
-@import "./node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
 // Modifiez les variables spécifiques aux boutons Bootstrap
 $btn-primary-color: black; // Couleur du texte du bouton (noir)
@@ -25,4 +26,14 @@ $btn-primary-bg: white; // Couleur de fond du bouton (blanc)
 $btn-primary-hover-bg: gray; // Couleur de fond du bouton lors du survol (gris)
 $btn-primary-active-bg: lightgray; // Couleur de fond du bouton lors du clic (gris clair)
 
-@import "./node_modules/bootstrap/scss/bootstrap.scss";
+// Styles personnalisés pour votre bouton
+.my-custom-button {
+  // Appliquez les classes Bootstrap nécessaires
+  @extend .btn;
+  @extend .btn-outline-light;
+
+  // Vos styles personnalisés ici (le cas échéant)
+}
+
+// Importez le reste de Bootstrap pour appliquer les styles
+@import "~bootstrap/scss/bootstrap";

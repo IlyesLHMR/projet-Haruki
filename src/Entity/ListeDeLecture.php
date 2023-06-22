@@ -34,6 +34,12 @@ class ListeDeLecture
         $this->serie = new ArrayCollection();
     }
 
+    // public function getEntityOptions(): Collection
+    // {
+    //     // Return the options for the series field
+    //     return $this->serie;
+    // }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -99,6 +105,12 @@ class ListeDeLecture
             $serie->removeListeDeLecture($this);
         }
 
+        return $this;
+    }
+
+    public function emptySeries(): self
+    {
+        $this->serie->clear();
         return $this;
     }
 }
