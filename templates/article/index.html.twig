@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container mt-4">
+    <h3>Nos articles:</h3>
+</div>
+
+<section class="articles bg-light py-5">
+    <div class="container">
+        <div class="row align-items-stretch">
+            {% for article in articles %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src={{ asset('assets/img/article/' ~ article.image()) }} alt="Article" class="card-img-top custom-img-height">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.titre }}</h5>
+                        <div class="text-center"><a href="{{ path('app_article_details', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a></div>
+                        {# <div class="text-center">{{ article.date_publication }}</div> #}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

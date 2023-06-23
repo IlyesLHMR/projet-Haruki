@@ -28,13 +28,17 @@ class ArticleCrudController extends AbstractCrudController
 
 
     public function configureFields(string $pageName): iterable
-    {
-       yield TextField::new('titre', 'Titre de l\'article');
-       yield TextField::new('Contenu', 'Contenu de l\'article');
-       yield ImageField::new('image', 'image de l\'article')
+{
+    yield TextField::new('titre', 'Titre de l\'article');
+    yield TextField::new('contenu', 'Contenu de l\'article')
+        ->formatValue(function ($value, $entity) {
+            return nl2br($value);
+        })
+        ->setFormTypeOption('attr', ['class' => 'large-textarea']);
+    yield ImageField::new('image', 'Image de l\'article')
         ->setUploadDir('public/assets/img/article')
         ->setBasePath('assets/img/article')
         ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]');
+}
 
-    }
 }

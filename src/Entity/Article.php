@@ -17,7 +17,7 @@ class Article
     #[ORM\Column(type: 'string', length: 255, nullable: false, options:['collation' => 'utf8_general_ci'])]
     private $titre = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: false, options:['collation' => 'utf8_general_ci'])]
+    #[ORM\Column(type: 'text', length: 255, nullable: false, options:['collation' => 'utf8_general_ci'])]
     private $contenu = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true, options:['collation' => 'utf8_general_ci'])]
@@ -25,6 +25,7 @@ class Article
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_publication = null;
+
 
     public function getId(): ?int
     {
@@ -78,4 +79,5 @@ class Article
 
         return $this;
     }
+
 }
