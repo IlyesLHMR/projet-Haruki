@@ -24,26 +24,30 @@
             </div>
         </div>
     </section>
-    <section class="articles bg-light py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Derniers articles</h2>
-            <hr>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                    {% for article in articles %}
-                        <img src={{ asset('assets/img/article/' ~ article.image()) }} alt="Article" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ article.titre }}</h5>
-                            <p class="card-text">{{ article.contenu }}</p>
-                           <div class="text-center"><a href="#" class="btn btn-primary">Lire la suite</a></div> 
-                           {# <div class="text-center">{{ article.date_publication }}</div> #}
-                        </div>
-                    {% endfor %}
+<section class="articles bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Derniers articles</h2>
+        <hr>
+        <div class="row align-items-stretch">
+            {% for article in articles[:3] %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src={{ asset('assets/img/article/' ~ article.image()) }} alt="Article" class="card-img-top custom-img-height">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.titre }}</h5>
+                        <p class="card-text">{{ article.contenu }}</p>
+                        <div class="text-center"><a href="#" class="btn btn-primary">Lire la suite</a></div>
+                        {# <div class="text-center">{{ article.date_publication }}</div> #}
                     </div>
                 </div>
             </div>
-       </section>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
     <section class="concept bg-light py-5">
         <div class="container">
             <h2 class="text-center mb-4">Le concept du manga café</h2>
@@ -55,10 +59,38 @@
                 <div class="col-md-6 mt-4">
                     <p>Le manga café est un lieu où les amateurs de mangas peuvent se retrouver pour lire, discuter et se plonger dans l'univers des mangas tout en profitant d'une boisson chaude ou froide. Chez Haruki, nous offrons une vaste sélection de mangas dans une atmosphère chaleureuse et accueillante.</p>
                     <p>Venez vivre une expérience immersive avec nos sélections de mangas populaires, des événements spéciaux et des espaces confortables pour vous plonger dans vos histoires préférées.</p>
-                    <div class="text-center"><a href="#" class="btn btn-primary mt-2">En savoir plus</a></div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section class="opening-hours py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Horaires d'ouverture</h2>
+                <ul class="list-unstyled">
+                    <li>Lundi : 9h00 - 18h00</li>
+                    <li>Mardi : 9h00 - 18h00</li>
+                    <li>Mercredi : 9h00 - 18h00</li>
+                    <li>Jeudi : 9h00 - 18h00</li>
+                    <li>Vendredi : 9h00 - 18h00</li>
+                    <li>Samedi : 10h00 - 16h00</li>
+                    <li>Dimanche : Fermé</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2>Adresse</h2>
+                <p>123, Avenue de l'opéra</p>
+                <p>Paris, 75000</p>
+                
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.5535007165427!2d2.3339411999999995!3d48.866724100000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e3aaaa0d7f9%3A0x6c042abcf251bda0!2sAv.%20de%20l&#39;Op%C3%A9ra%2C%20Paris!5e0!3m2!1sfr!2sfr!4v1687525936794!5m2!1sfr!2sfr" width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 {% endblock %}
