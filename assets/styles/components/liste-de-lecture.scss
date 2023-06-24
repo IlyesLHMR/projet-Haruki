@@ -1,10 +1,58 @@
 .boxed {
-    height: 300px;
-    overflow-y: auto;
-    margin-bottom: 25px;
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 25px;
+}
+
+.new-btn {
+font-weight: bolder!important;
+padding: 10px 25px!important;
+}
+
+.bookCard {
+position: relative;
+.remove-from-list-trigger{
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-top-right-radius: 4px;
+  margin: 2rem;
+  width: 30px;
+  height: 30px;
+  background: #000;
+  color: #fff;
+  padding: 5px!important;
+  font-size: 25px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none!important;
+}
+
+&:hover {
+  .remove-from-list-trigger {
+    display: flex!important;
   }
-  
-  .new-btn {
-    font-weight: bolder!important;
-    padding: 10px 25px!important;
-  }
+}
+
+.card-spinner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFFFFFAA;
+  color: rgb(253, 209, 216);
+  font-size: 30px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+}

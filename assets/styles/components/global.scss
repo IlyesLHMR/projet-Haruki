@@ -45,9 +45,9 @@ html, body {
     margin-bottom: 150vh;
 }
 
-main {
+// main {
 
-}
+// }
 /*
     reglage du body - styles par defaut:
     . type de police
@@ -148,4 +148,12 @@ body {
 }
 .h-100vh {
     min-width: 100vh;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-default {
+    cursor:default;
 }

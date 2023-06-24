@@ -10,6 +10,7 @@ import './styles/app.scss';
 
 //Import de fichier js perso.
 import './js/navbar.js';
+import './js/liste-de-lecture.js';
 
 // start the Stimulus application
 import './bootstrap';

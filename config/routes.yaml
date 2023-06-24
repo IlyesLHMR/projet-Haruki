@@ -102,3 +102,12 @@ app_stripe_success:
 app_stripe_fail:
   path: /payment/failure
   controller: App\Controller\StripeController::paymentFailure
+
+#Ajax Controller
+app_ajax_remove_from_list:
+  path: /ajax/remove-serie-from-list/{idSerie}/{idListe}
+  controller: App\Controller\AjaxController::removeSerieFromList
+  methods: GET
+  defaults:
+    idSerie: 0
+    idListe: 0

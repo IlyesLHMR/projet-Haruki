@@ -30,6 +30,16 @@
 									<p class="card-text">{{ serie.nbDeTomes }} tomes</p> 
 								</div>
 							</a>
+
+							<div class="remove-from-list-trigger cursor-pointer" title="Retirer de la liste" data-serieId="{{ serie.id }}" data-listeId="{{ liste.id }}">
+								<span class="material-symbols-outlined">close</span>
+							</div>
+
+							<div class="card-spinner d-none">
+								<div class="spinner-border" role="status">
+									<span class="visually-hidden">Loading...</span>
+								</div>
+							</div>
 						</div>
 					{% endfor %}
 					</div>
@@ -41,6 +51,4 @@
 		<p>Aucune liste de lecture disponible</p>
 
 	{% endif %}
-
-
 {% endblock %}
