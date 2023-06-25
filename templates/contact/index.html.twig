@@ -3,6 +3,7 @@
 {% block title %}Haruki - Contact{% endblock %}
 
 {% block body %}
+    <a href="{{ path('app_home') }}" class="btn btn-primary m-4">Retour</a>
     <div class="container">
     {% for message in app.flashes('success') %}
         <div class="alert alert-success mt-4">
