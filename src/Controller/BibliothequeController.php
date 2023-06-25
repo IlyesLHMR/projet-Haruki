@@ -41,15 +41,18 @@ class BibliothequeController extends AbstractController
             $request->query->getInt('page', 1),
             3
         );
-        $listes = $this->userInfo->user->getListeLecture();
         $userSeries = [];
-
-        foreach($listes as $liste){
-            foreach($liste->getSerie() as $serie)
-            $userSeries[] = $serie;
+        $listes = [];
+        if($this->userInfo->user) {
+            $listes = $this->userInfo->user->getListeLecture();
+            foreach($listes as $liste) {
+                foreach($liste->getSerie() as $serie){
+                    $userSeries[] = $serie;
+                }
+            }
         }
 
-        // Utiliser shufflepour l'affichage de manière aléatoire des valeurs de ma bdd
+        // Utiliser shuffle pour l'affichage de manière aléatoire des valeurs de ma bdd
         
         // dd($userSeries);
 
@@ -78,7 +81,7 @@ class BibliothequeController extends AbstractController
         ]);
     }
 
-
+    
 
     
  

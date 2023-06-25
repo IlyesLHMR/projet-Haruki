@@ -46,4 +46,35 @@ class AjaxController extends AbstractController
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+
+    public function addSerieToList(int $idSerie, int $idListe): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        if(!$idSerie || !$idListe) {
+            $array = array('success' => false); // data to return via JSON
+            $response = new Response(json_encode($array));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
+        $liste = $this->db->getRepository(ListeDeLecture::class)->find($idListe);
+        $serie = $this->db->getRepository(Serie::class)->find($idSerie);
+
+        $liste->addSerie($serie);
+        $this->db->persist($liste);
+        $this->db->flush();
+
+        $array = array(
+            'success' => true,
+            'idSerie' => $idSerie,
+            'idListe' => $idListe,
+            'nomListe' => $liste->getTitre(),
+        ); // data to return via JSON
+        $response = new Response(json_encode($array));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+
+
 }
