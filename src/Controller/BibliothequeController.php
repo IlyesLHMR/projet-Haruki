@@ -41,11 +41,24 @@ class BibliothequeController extends AbstractController
             $request->query->getInt('page', 1),
             3
         );
-            // Utiliser shufflepour l'affichage de manière aléatoire des valeurs de ma bdd
-            
+        $listes = $this->userInfo->user->getListeLecture();
+        $userSeries = [];
+
+        foreach($listes as $liste){
+            foreach($liste->getSerie() as $serie)
+            $userSeries[] = $serie;
+        }
+
+        // Utiliser shufflepour l'affichage de manière aléatoire des valeurs de ma bdd
+        
+        // dd($userSeries);
+
         return $this->render('bibliotheque/index.html.twig', [
             'userInfo' => $this->userInfo,
+            'isUser' => $this->userInfo->user && !$this->userInfo->isAdmin,
             'series' => $serieRepo,
+            'listes' => $listes,
+            'userSeries' => $userSeries,
 
         ]);
         

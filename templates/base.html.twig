@@ -68,6 +68,8 @@ urls: {
 // exemple:
 // home: "{{ path('app_home',{'slug': 'home-url'})|escape('js') }}"
 	removeFromList: '{{ absolute_url(path('app_ajax_remove_from_list')) }}',
+	addToList: '{{ absolute_url(path('app_ajax_add_serie_to_list')) }}',
+	editList: '{{ absolute_url(path('app_member_editList')) }}',
 }
 };
 		</script>

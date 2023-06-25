@@ -55,6 +55,8 @@ app_member_editList:
   path: /member/editList/{id}
   controller: App\Controller\MembreController::editList
   methods: [GET, POST]
+  defaults:
+    id: 0
 
 app_member_deleteList:
   path: /member/deleteList/{id}
@@ -107,6 +109,14 @@ app_stripe_fail:
 app_ajax_remove_from_list:
   path: /ajax/remove-serie-from-list/{idSerie}/{idListe}
   controller: App\Controller\AjaxController::removeSerieFromList
+  methods: GET
+  defaults:
+    idSerie: 0
+    idListe: 0
+
+app_ajax_add_serie_to_list:
+  path: /ajax/add-serie-to-list/{idSerie}/{idListe}
+  controller: App\Controller\AjaxController::addSerieToList
   methods: GET
   defaults:
     idSerie: 0

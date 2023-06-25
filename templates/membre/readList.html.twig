@@ -18,9 +18,9 @@
 					<a href="{{ path('app_member_editList', { id: liste.id }) }}" class="btn btn-primary mb-2">modifier</a>
 					<a href="{{ path('app_member_deleteList', { id: liste.id }) }}" class="btn btn-danger mb-2">Supprimer</a>
 					<hr>
-					<div class="container zoom d-flex flex-row flex-wrap">
+					<div class="container d-flex flex-row flex-wrap">
 					{% for serie in liste.serie %}
-						<div class="bookCard">
+						<div class="bookCard zoom">
 							<a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}">
 								<img style="" src="{{ asset('assets/img/uploaded/' ~ serie.coverSerie) }}" alt="cover">
 

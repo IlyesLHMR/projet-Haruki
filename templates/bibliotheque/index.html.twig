@@ -10,18 +10,66 @@
     <div class="book-list d-flex justify-content-center">
 
         {% for serie in series %}
-            <div class="container zoom d-flex justify-content-center">
-                <div class="bookCard">
-                    <a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}"> {# Ici j'appelle la page de détail de la série qui affiche les entité manga#}
-                        <img style="" src="{{ asset('assets/img/uploaded/' ~ serie.coverSerie()) }}" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title border-bottom border-1 border-danger">{{ serie.nomSerie }}</h5>
-                            <p class="card-text"><em>ed. {{ serie.editeur }}</em></p>
-                            <p class="card-text">{{ serie.nbDeTomes }} tomes</p>
-                            
+            <div class="container d-flex justify-content-center">
+                <div class="bookCard zoom flip">
+                    <div class="flip-front">
+                        <a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}"> {# Ici j'appelle la page de détail de la série qui affiche les entité manga#}
+                            <img style="" src="{{ asset('assets/img/uploaded/' ~ serie.coverSerie()) }}" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title border-bottom border-1 border-danger">{{ serie.nomSerie }}</h5>
+                                <p class="card-text"><em>ed. {{ serie.editeur }}</em></p>
+                                <p class="card-text">{{ serie.nbDeTomes }} tomes</p>
+                            </div>
+                        </a>
+                        {% if isUser %}
+                        <div class="flip-it-trigger cursor-pointer">
+                            <span class="material-symbols-outlined">
+                                {% if serie not in userSeries %}
+                                    add
+                                {% else %}
+                                    more_horiz
+                                {% endif %}
+                            </span>
                         </div>
-                        <button class="btn btn-outline-light mb-2" style="z-index:10">Ajouter</button>
-                    </a>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="flip-back cursor-pointer p-3">
+                        <div class="d-flex flex-column justify-content-center align-item-start h-100 back-info scroll-auto added">
+                            {% if serie in userSeries %}
+                                <h5 class="text-center mb-4 text-decoration-underline ">Cette série a déjà été ajoutée à :</h5>
+                                {% for liste in listes %}
+                                    {% if serie in liste.serie %}
+                                        <p>-
+                                            <a class="text-decoration-none text-white lnk-undrline fs-4" href="{{ path('app_member_editList', {'id': liste.id}) }}">
+                                                {{ liste.titre }}
+                                            </a>
+                                        </p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <h5 class="text-center mb-4 text-decoration-underline">Ajouter à :</h5>
+                                {% for liste in listes %}
+                                    <p>-
+                                        <span class="text-decoration-none text-white lnk-undrline fs-4 add-to-list" data-idSerie="{{ serie.id }}" data-idListe="{{ liste.id }}">
+                                            {{ liste.titre }}
+                                        </span>
+                                    </p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        
+                        <div class="flip-out-trigger cursor-pointer">
+                            <span class="material-symbols-outlined">close</span>
+                        </div>
+                        <div class="card-spinner d-none">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         {% endfor %}
