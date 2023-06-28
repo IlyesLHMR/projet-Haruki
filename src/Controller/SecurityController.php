@@ -15,6 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
@@ -167,14 +169,15 @@ class SecurityController extends AbstractController
 
     #[Route('/delete-account', name: 'delete_account')]
     public function deleteAccount(UserInterface $user, EntityManagerInterface $entityManager): Response
-{
-    // Supprimez l'utilisateur de la base de données
-    $entityManager->remove($user);
-    $entityManager->flush();
+    {
+        // Supprimez l'utilisateur de la base de données
+        $entityManager->remove($user);
+        $entityManager->flush();
+        $session = new Session();
+        $session->invalidate();
+        // Effectuez toutes les autres opérations nécessaires lors de la suppression du compte
 
-    // Effectuez toutes les autres opérations nécessaires lors de la suppression du compte
-
-    // Redirigez l'utilisateur vers une page appropriée après la suppression du compte
-    return $this->redirectToRoute('app_home');
-}
+        // Redirigez l'utilisateur vers une page appropriée après la suppression du compte
+        return $this->redirectToRoute('app_home');
+    }
 }

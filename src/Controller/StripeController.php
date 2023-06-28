@@ -4,21 +4,23 @@
 namespace App\Controller;
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-use Symfony\Component\HttpFoundation\Request;
 
-use Symfony\Component\HttpFoundation\Response;
-
-use Stripe;
+use Stripe\Charge;
 
 use App\Service\AppHelpers;
 
 use Doctrine\Persistence\ManagerRegistry;
+use Stripe\Stripe as Stripe;
+use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Security\Core\Security;
 
+use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\HttpFoundation\RequestStack;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class StripeController extends AbstractController
@@ -54,17 +56,13 @@ class StripeController extends AbstractController
         $this->session = $requestStack->getSession();
 
 
-        // on simule le montant obtenu depuis la page de commande:
-
-        $this->session->set('orderTotal',10 );
-
     }
 
-    public function index(): Response
+    public function index(Request $request ): Response
 
     {
 
-        return $this->render('stripe/index.html.twig', [
+        return $this->render('stripe/index.html.twig',  [
 
             'clef_stripe' => $_ENV["STRIPE_KEY"],
 
@@ -74,7 +72,7 @@ class StripeController extends AbstractController
 
             'userInfo' => $this->userInfo,
 
-            'orderTotal' => $this->session->get('orderTotal'),
+            'orderTotal' => $request->get('amount')
 
         ]);
 
@@ -85,13 +83,13 @@ class StripeController extends AbstractController
 
     {
 
-        Stripe\Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
+        Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
 
         try {
 
-            Stripe\Charge::create([
+            Charge::create([
 
-                "amount" => $this->session->get('orderTotal') * 100,
+                "amount" => $request->request->get('amount') * 100,
 
                 "currency" => "eur",
 
@@ -100,7 +98,6 @@ class StripeController extends AbstractController
                 "description" => "Payment Test"
 
             ]);
-
         } catch (\Exception $e) {
 
             return $this->redirectToRoute('app_stripe_fail', [
@@ -108,12 +105,10 @@ class StripeController extends AbstractController
                 'error' => $e->getMessage(),
 
             ], Response::HTTP_SEE_OTHER);
-
         }
 
 
-        return $this->redirectToRoute('app_stripe_success', [], Response::HTTP_SEE_OTHER);
-
+        return $this->redirectToRoute('app_stripe_success', ['amount' => $request->get('amount')], Response::HTTP_SEE_OTHER);
     }
 
 

@@ -51,3 +51,5 @@ node_modules
 # Embedded web-server pid file
 /.web-server-pid
 node_modules
+
+/public/bundles/sonataform/moment-locale/
