@@ -56,7 +56,7 @@ class StripeController extends AbstractController
 
         // on simule le montant obtenu depuis la page de commande:
 
-        $this->session->set('orderTotal', 52.6);
+        $this->session->set('orderTotal',10 );
 
     }
 

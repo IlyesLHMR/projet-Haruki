@@ -4,5 +4,6 @@
   "build/runtime.js": "/build/runtime.js",
   "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-daad55.js": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_ar-daad55.js",
   "build/images/fond.png": "/build/images/fond.6b5d1576.png",
-  "build/images/motif.jpg": "/build/images/motif.4376d223.jpg"
+  "build/images/motif.jpg": "/build/images/motif.6b5d1576.jpg",
+  "build/images/motif.png": "/build/images/motif.6b5d1576.png"
 }

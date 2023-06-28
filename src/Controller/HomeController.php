@@ -50,4 +50,11 @@ class HomeController extends AbstractController
             'userInfo' => $this->userInfo,
         ]);
     }
+
+    public function  donate(): Response
+    {
+        return $this->render('dons.html.twig', [
+            'userInfo' => $this->userInfo,
+        ]);
+    }
 }

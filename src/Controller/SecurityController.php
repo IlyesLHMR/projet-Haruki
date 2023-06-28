@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use App\Service\AppHelpers;
 use App\Repository\UserRepository;
+use App\Form\ResetPasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ResetPasswordRequestFormType;
-use App\Form\ResetPasswordFormType;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -34,9 +35,9 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        // get the login error if there is one
+        // Obtention de l'erreur de connexion si il y'en a une
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        // Dernier utilisateur entré
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
@@ -163,4 +164,17 @@ class SecurityController extends AbstractController
         $this->addFlash('danger', 'Jeton invalide');
         return $this->redirectToRoute('app_login');
     }
+
+    #[Route('/delete-account', name: 'delete_account')]
+    public function deleteAccount(UserInterface $user, EntityManagerInterface $entityManager): Response
+{
+    // Supprimez l'utilisateur de la base de données
+    $entityManager->remove($user);
+    $entityManager->flush();
+
+    // Effectuez toutes les autres opérations nécessaires lors de la suppression du compte
+
+    // Redirigez l'utilisateur vers une page appropriée après la suppression du compte
+    return $this->redirectToRoute('app_home');
+}
 }

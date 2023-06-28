@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
     private $userInfo;
     private $session;
 
-    public function __construct(EmailVerifier $emailVerifier,  AppHelpers $app, RequestStack $requestStack)
+    public function __construct(EmailVerifier $emailVerifier,  AppHelpers $app, RequestStack $requestStack,  )
     {
         $this->app = $app;
         $this->emailVerifier = $emailVerifier;
@@ -47,6 +47,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            // Generate a reset token
+        $token = $this->generateToken();
+        $user->setResetToken($token);
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -56,7 +59,7 @@ class RegistrationController extends AbstractController
                 'app_verify_email',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('info@mon-site.com', 'WebMaster Mon-Site'))
+                    ->from(new Address('Admin@Haruki-concept.com', 'WebMaster Mon-Site'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
@@ -76,6 +79,18 @@ class RegistrationController extends AbstractController
             'userInfo' => $this->userInfo,
         ]);
     }
+
+    private function generateToken(): string
+{
+    // Logic to generate a unique token
+    // You can use any method that suits your needs, such as generating a random string or using a library like Ramsey\Uuid
+    // Make sure the generated token is unique and has enough entropy to be secure
+
+    // Example using random_bytes to generate a token
+    $token = bin2hex(random_bytes(32));
+
+    return $token;
+}
 
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {

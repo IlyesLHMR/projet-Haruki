@@ -17,6 +17,10 @@ app_privacyPolicy:
   path: /privacy-policy
   controller: App\Controller\HomeController::privacyPolicy
 
+app_dons:
+  path: /dons
+  controller: App\Controller\HomeController::donate
+
   
 #  Page de la bibliotheque
 app_bibliotheque:    # Liste des séries 
@@ -104,6 +108,8 @@ app_stripe_success:
 app_stripe_fail:
   path: /payment/failure
   controller: App\Controller\StripeController::paymentFailure
+
+
 
 #Ajax Controller
 app_ajax_remove_from_list:
