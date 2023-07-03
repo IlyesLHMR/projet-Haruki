@@ -11,7 +11,9 @@ use Stripe\Charge;
 use App\Service\AppHelpers;
 
 use Doctrine\Persistence\ManagerRegistry;
+
 use Stripe\Stripe as Stripe;
+
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Security\Core\Security;
@@ -22,6 +24,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
+use Symfony\Component\Mailer\MailerInterface;
 
 class StripeController extends AbstractController
 
@@ -108,13 +113,34 @@ class StripeController extends AbstractController
         }
 
 
-        return $this->redirectToRoute('app_stripe_success', ['amount' => $request->get('amount')], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_stripe_success', ['amount' => $request->get('amount'), 'mail' => $request->get('mail')], Response::HTTP_SEE_OTHER);
     }
 
 
-    public function orderConfirmation(): Response
+    public function orderConfirmation(Request $request,  MailerInterface $mailer): Response
 
     {
+        $amount = $request->get('amount');
+        $mail = $request->get('mail');
+    
+
+        $email = (new TemplatedEmail())
+        ->from('Admin@Haruki-concept.com')
+        ->to($mail)
+        ->htmlTemplate('emails/don.html.twig')
+        ->subject('Confirmation de réception de votre don')
+        ->context([
+            'username' => 'foo',
+            'amount' => $amount,
+        ]);
+
+        $mailer->send($email);
+
+        $this->addFlash(
+            'success',
+            'Votre demande a bien été traitée, vous allez etre redirigé'
+        );
+
 
         return $this->render('stripe/order_confirmation.html.twig', [
 
@@ -124,9 +150,11 @@ class StripeController extends AbstractController
 
             'userInfo' => $this->userInfo,
 
-            'orderTotal' => $this->session->get('orderTotal'),
+            'orderTotal' => $amount,
 
         ]);
+
+        
 
     }
 

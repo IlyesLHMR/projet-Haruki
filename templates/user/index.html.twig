@@ -1,16 +1,37 @@
 {% extends 'layout-full-width.html.twig' %}
 
-
 {% block contentFullWidth %}
-<div class="member-page-container">
-	<div class="general-setting">
-		<ul>
-			<li><a href="#">Mon abonnement</a></li>
-			<li><a href="#">Changer l'adresse email</a></li>
-			<li><a href="{{ path('forgotten_password') }}" >Mot de passe oublié</a></li>
-			<li><a href="{{ path('delete_account') }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?')">Supprimer mon compte</a></li>
-		</ul>
-	</div>
-	<div class="affichageSetting"></div>
-</div>	
+    <div class="member-page-container">
+        <div class="general-setting">
+            <ul>
+                <li><a href="#">Mon abonnement</a></li>
+                <li><a href="#">Changer l'adresse email</a></li>
+                <li><a href="{{ path('forgotten_password') }}">Mot de passe oublié</a></li>
+                <li>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Supprimer mon compte</a>
+                </li>
+            </ul>
+        </div>
+        <div class="affichageSetting"></div>
+    </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>Êtes-vous sûr de vouloir supprimer votre compte ?</h4>
+					<p>Cette action est définitive</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <a href="{{ path('delete_account') }}" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

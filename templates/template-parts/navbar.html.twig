@@ -9,22 +9,23 @@
       <span></span>
     </button>
 
-    {% if userInfo.isAdmin %}
+    {# {% if userInfo.isAdmin %} #}
+    {% if is_granted('ROLE_ADMIN') %}
     <div class="navlinks-container">
       <a href="{{ path('app_home') }}" aria-current="page">Home</a>
       <a href="{{ path('app_bibliotheque') }}">Bibliothèque</a>
       <a href="{{ path('app_article') }}">Articles</a> 
-      <a href="{{ path('app_admin') }}">Backoffice</a>    
-      <a href="{{ path('app_logout') }}"><button type="submit" class="btn btn-primary">Déconnexion</button></a>
+      <a href="{{ path('app_admin') }}">Backoffice</a>
+      <a href="#" data-bs-toggle="modal" data-bs-target="#confirmDisconect" class="btn btn-primary" >Déconnexion</a>
     </div>
-    {% elseif userInfo.isLoggedIn %}
+    {% elseif is_granted('ROLE_USER') %}
     <div class="navlinks-container">
       <a href="{{ path('app_home') }}" aria-current="page">Home</a>
       <a href="{{ path('app_bibliotheque') }}">Bibliothèque</a>
       <a href="{{ path('app_article') }}">Articles</a> 
       <a href="{{ path('app_member_readList') }}">Mes lectures</a> 
       <a href="{{ path('app_user') }}">Mon compte</a>   
-      <a href="{{ path('app_logout') }}"><button type="submit" class="btn btn-primary">Déconnexion</button></a>
+      <a href="#" data-bs-toggle="modal" data-bs-target="#confirmDisconect" class="btn btn-primary" >Déconnexion</a>
     </div>
     {% else %}
     <div class="navlinks-container">
@@ -37,3 +38,22 @@
     {% endif %}
   </div>
 </nav>
+
+<!-- Modal de confirmation de suppression -->
+    <div class="modal fade" id="confirmDisconect" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Déconnexion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>Voulez vraiment vous déconnecter ?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <a href="{{ path('app_logout') }}" class="btn btn-primary">Déconnexion</a>
+                </div>
+            </div>
+        </div>
+    </div>

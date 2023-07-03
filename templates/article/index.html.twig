@@ -2,11 +2,13 @@
 
 
 {% block body %}
-<div class="container mt-4">
-    <h3>Nos articles:</h3>
+<div class="first-title bg-primary text-dark py-5">
+	<div class="container">
+    	<h3>Nos articles :</h3>
+	</div>
 </div>
 
-<section class="articles bg-light py-5">
+<section class="articles py-5">
     <div class="container">
         <div class="row align-items-stretch">
             {% for article in articles %}
@@ -14,7 +16,7 @@
                 <div class="card mb-4">
                     <img src={{ asset('assets/img/article/' ~ article.image()) }} alt="Article" class="card-img-top custom-img-height">
                     <div class="card-body">
-                        <h5 class="card-title">{{ article.titre }}</h5>
+                        <h5 class="card-title truncate-title">{{ article.titre }}</h5>
                         <div class="text-center"><a href="{{ path('app_article_details', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a></div>
                         {# <div class="text-center">{{ article.date_publication }}</div> #}
                     </div>

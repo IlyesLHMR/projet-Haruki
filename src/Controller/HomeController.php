@@ -29,7 +29,7 @@ class HomeController extends AbstractController
 
     public function index(ArticleRepository $articleRepo): Response
     {
-        $articleRepo = $this->db->getRepository(Article::class)->findAll();
+        $articleRepo = $this->db->getRepository(Article::class)->findBy([],['id' => 'DESC']);
 
         return $this->render('home/index.html.twig', [
             'userInfo' => $this->userInfo,

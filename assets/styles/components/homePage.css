@@ -3,3 +3,12 @@
     object-fit: cover;
   }
   
+  .espacement {
+    width: 100%;
+    height: 20px;
+  }
+
+  .home-section {
+    border-radius: 8px;
+    margin-top: 10px;
+  }
