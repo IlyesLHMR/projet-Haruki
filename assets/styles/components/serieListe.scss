@@ -1,3 +1,9 @@
+/* .bookCard h1 {
+    font-size: 20px;
+} */
+
+
+
 .bookCard {
     position: relative;
     .flip-it-trigger {
@@ -160,19 +166,4 @@
         }
     }
     
-}
-@media only screen and (max-width: 767px) {
-    .bookCard {
-        .card {
-            width: 100%;
-            height: auto;
-            margin: 1rem;
-            padding: 1rem;
-        }
-        
-        img {
-            width: 100%;
-            height: auto;
-        }
-    }
 }
