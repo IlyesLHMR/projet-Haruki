@@ -1,27 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+	Haruki-concept | Manga
+{% endblock %}
+
 {% block body %}
 
-{# <a href="{{ path('app_bibliotheque') }}" class="btn btn-primary m-4">Retour</a>
-  <section class="series-section">
-    <div class="container">
-      <h2 class="section-title">{{ series.getNomSerie }}</h2>
-      <p class="section-description">{{ series.descriptif }}</p>
-
-       <div class="card-deck">
-        {% for manga in mangas %}
-          <div class="card">
-            <img src="{{ asset('assets/img/uploaded/' ~ manga.image_cover) }}" alt="" class="card-img-top">
-            <div class="card-body">
-              <p class="card-text">Tome {{ manga.numeroTome }}</p>
-            </div>
-          </div>
-        {% endfor %}
-      </div> 
-
-
-    </div>
-  </section> #}
   <head>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css"/>

@@ -26,6 +26,7 @@ class SerieCrudController extends AbstractCrudController
         // );
         
         yield TextField::new('nom_serie' , 'Nom de la série');
+        yield TextField::new('descriptif' , 'Descriptif');
         yield IntegerField::new('nb_de_tomes', 'Nombre de tomes');
         yield TextField::new('edition', 'Edition');
         yield TextField::new('editeur', 'Editeur');

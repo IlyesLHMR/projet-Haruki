@@ -9,6 +9,11 @@
 	{% for flash_error in app.flashes('verify_email_error') %}
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
+	{# ---Ajout---- #}
+	{% for flash_error in app.flashes('new_link_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}<a href="{{ path('app_email_link_renew') }}">lien</a></div>
+	{% endfor %}
+	{# ---Fin Ajout---- #}
 
 	<h1>S'inscrire</h1>
 

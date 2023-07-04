@@ -18,6 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Service\AppHelpers;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RegistrationController extends AbstractController
 {
@@ -48,8 +49,8 @@ class RegistrationController extends AbstractController
                 )
             );
             // Generate a reset token
-        $token = $this->generateToken();
-        $user->setResetToken($token);
+            $token = $this->generateToken();
+            $user->setResetToken($token);
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -81,18 +82,35 @@ class RegistrationController extends AbstractController
     }
 
     private function generateToken(): string
-{
-    // Logic to generate a unique token
-    // You can use any method that suits your needs, such as generating a random string or using a library like Ramsey\Uuid
-    // Make sure the generated token is unique and has enough entropy to be secure
+    {
+        // Logic to generate a unique token
+        // You can use any method that suits your needs, such as generating a random string or using a library like Ramsey\Uuid
+        // Make sure the generated token is unique and has enough entropy to be secure
 
-    // Example using random_bytes to generate a token
-    $token = bin2hex(random_bytes(32));
+        // Example using random_bytes to generate a token
+        $token = bin2hex(random_bytes(32));
 
-    return $token;
-}
+        return $token;
+    }
 
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    public function renewEmailLink(): RedirectResponse
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        $this->emailVerifier->sendEmailConfirmation(
+            'app_verify_email',
+            $user,
+            (new TemplatedEmail())
+                ->from(new Address('Admin@Haruki-concept.com', 'WebMaster Mon-Site'))
+                ->to($user->getEmail())
+                ->subject('Please Confirm your Email')
+                ->htmlTemplate('registration/confirmation_email.html.twig')
+        );
+
+        return $this->redirectToRoute('app_email_conf_sent');
+    }
+
+    public function verifyUserEmail(Request $request, TranslatorInterface $translator, RequestStack $requestStack): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -100,7 +118,12 @@ class RegistrationController extends AbstractController
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+            if($translator->trans($exception->getReason(), [], 'VerifyEmailBundle') === 'The link to verify your email has expired. Please request a new link.')
+            {
+                $this->addFlash('new_link_error', "Le lien pour vérifier votre adresse e-mail a expiré. Veuillez demander un nouveau ");
+            } else {
+                $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+            }
 
             return $this->redirectToRoute('app_register');
         }

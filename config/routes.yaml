@@ -90,6 +90,9 @@ app_email_conf_sent:
   path: /signup/confirmation
   controller: App\Controller\RegistrationController::postSignUp
 
+app_email_link_renew:
+  path: /email/renew
+  controller: App\Controller\RegistrationController::renewEmailLink
 
 # Stripe
 app_stripe:

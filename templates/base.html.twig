@@ -37,19 +37,20 @@
 
 	</head>
 	<body>
-		{# Inclusion de la barre de nav supérieure #}
-		{% include "template-parts/navbar.html.twig" %}
+		<div id="app-container">
+			{# Inclusion de la barre de nav supérieure #}
+			{% include "template-parts/navbar.html.twig" %}
 
-		{# Block body #}
-		{% block header %}{% endblock %}
+			{% block header %}{% endblock %}
 
-		<main>
-			{# Block body #}
-			{% block body %}{% endblock %}
-		</main>
+			<main>
+				{# Block body #}
+				{% block body %}{% endblock %}
+			</main>
 
-		{# Inclusion du footer #}
-		{% include "./template-parts/footer.html.twig" %}
+			{# Inclusion du footer #}
+			{% include "./template-parts/footer.html.twig" %}
+		</div>
 
 		{# Bootstrap #}
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>

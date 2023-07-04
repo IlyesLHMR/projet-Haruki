@@ -1,11 +1,16 @@
-{% extends 'layout-full-width.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block contentFullWidth %}
+{% block body %}
+
+<div class="first-title bg-primary text-dark py-5">
+	<div class="container">
+    	<h3>Gérez votre compte</h3>
+	</div>
+</div>
+
     <div class="member-page-container">
         <div class="general-setting">
             <ul>
-                <li><a href="#">Mon abonnement</a></li>
-                <li><a href="#">Changer l'adresse email</a></li>
                 <li><a href="{{ path('forgotten_password') }}">Mot de passe oublié</a></li>
                 <li>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Supprimer mon compte</a>

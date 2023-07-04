@@ -39,7 +39,7 @@ class BibliothequeController extends AbstractController
         $serieRepo = $paginator->paginate(
             $serieRepo = $this->db->getRepository(Serie::class)->findAll(),
             $request->query->getInt('page', 1),
-            3
+            5
         );
         $userSeries = [];
         $listes = [];

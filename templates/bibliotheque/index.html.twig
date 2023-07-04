@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+	Haruki-concept | Mangas
+{% endblock %}
 
 {% block body %}
+
 
   
     <div class="first-title bg-primary text-dark py-5">
@@ -15,7 +19,7 @@
     <div class="book-list d-flex justify-content-center">
 
         {% for serie in series %}
-            <div class="container d-flex justify-content-center">
+            <div class="container d-flex justify-content-center ligne">
                 <div class="bookCard zoom flip">
                     <div class="flip-front">
                         <a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}"> {# Ici j'appelle la page de détail de la série qui affiche les entité manga#}
@@ -79,7 +83,7 @@
             </div>
         {% endfor %}
 
-    </div>
+
 </section>
 
 
@@ -90,4 +94,5 @@
         </div>
     </div>
 
+</div>
 {% endblock %}
