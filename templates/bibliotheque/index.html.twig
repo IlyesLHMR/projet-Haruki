@@ -16,10 +16,10 @@
 
 
 <section class="col-12 row-5">
-    <div class="book-list d-flex justify-content-center">
+    <div class="book-list d-flex flex-row flex-wrap justify-content-center">
 
         {% for serie in series %}
-            <div class="container d-flex justify-content-center ligne">
+            
                 <div class="bookCard zoom flip">
                     <div class="flip-front">
                         <a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}"> {# Ici j'appelle la page de détail de la série qui affiche les entité manga#}
@@ -80,7 +80,7 @@
                     </div>
 
                 </div>
-            </div>
+            
         {% endfor %}
 
 

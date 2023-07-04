@@ -27,7 +27,7 @@ class ContactType extends AbstractType
                     'minlength' => '2',
                     'maxlength' => '180',
                 ],
-                'label' => 'Adresse email',
+                'label' => 'Adresse email *',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -41,7 +41,7 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Sujet',
+                'label' => 'Sujet *',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -53,7 +53,7 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',     
                 ],
-                'label' => 'Message',
+                'label' => 'Message *',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],

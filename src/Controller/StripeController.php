@@ -138,7 +138,7 @@ class StripeController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Votre demande a bien été traitée, vous allez etre redirigé'
+            'Votre demande a bien été traitée, vous allez etre redirigé(e)'
         );
 
 
