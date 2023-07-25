@@ -7,13 +7,21 @@
     	<h3>Gérez votre compte</h3>
 	</div>
 </div>
-
+    
     <div class="member-page-container">
         <div class="general-setting">
             <ul>
-                <li><a href="{{ path('forgotten_password') }}">Mot de passe oublié</a></li>
                 <li>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Supprimer mon compte</a>
+                    <div class="container p-4 border border-primary rounded-lg">
+                        <a href="{{ path('forgotten_password') }}" class="btn btn-primary">Mot de passe oublié</a>
+                        <p class="mt-4"> En cas d'oublie, Vous pouvez réinitialiser votre mot de passe, vous recevrez le lien de réinitialisation par mail après l'avoir renseignésur la page de réinitialisation.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="container p-4 border border-primary rounded-lg">
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Supprimer mon compte</a>
+                        <p class="mt-4">La supression de votre compte est un acte définitif. Il entraine la supression de vos données.</p>
+                    </div>
                 </li>
             </ul>
         </div>
