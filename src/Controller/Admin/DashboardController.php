@@ -7,7 +7,6 @@ use App\Entity\Manga;
 use App\Entity\Serie;
 use App\Entity\Article;
 use App\Controller\Admin\ArticleCrudController;
-
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;

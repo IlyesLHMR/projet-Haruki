@@ -137,7 +137,7 @@ class StripeController extends AbstractController
         $mailer->send($email);
 
         $this->addFlash(
-            'success',
+            'success_don',
             'Votre demande a bien été traitée, vous allez etre redirigé(e)'
         );
 

@@ -17,7 +17,10 @@ class ListeDeLectureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre')
+            ->add('titre', null, [
+                'label' => 'Titre *',
+                'attr' => ['placeholder' => 'Entrez le titre de la liste'],
+            ])
             ->add('series', EntityType::class, [
                 'label' => 'Ajoutez/supprimez des séries de votre liste:',
                 'mapped' =>false,

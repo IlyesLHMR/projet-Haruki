@@ -6,20 +6,29 @@
 
 {% block body %}
 
+{% if app.user == false %}
 
-  
     <div class="first-title bg-primary text-dark py-5">
-	    <div class="container">
+        <div class="container">
         	<h3>Découvrez toutes nos références de manga:</h3>
-	    </div>
+        </div>
     </div>
 
+{% else %}
+
+    <div class="first-title bg-primary text-dark py-5">
+        <div class="container">
+        	<h3>Découvrez toutes nos références de manga:</h3>
+            <p> Lorsque vous avez créé votre liste dans "Mes lectures", cliquez en haut à droite du manga pour ajouter la série à l'une de vos listes.</p>
+        </div>
+    </div>
+
+{% endif %}
 
 <section class="col-12 row-5">
     <div class="book-list d-flex flex-row flex-wrap justify-content-center">
 
         {% for serie in series %}
-            
                 <div class="bookCard zoom flip">
                     <div class="flip-front">
                         <a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}"> {# Ici j'appelle la page de détail de la série qui affiche les entité manga#}
@@ -95,4 +104,6 @@
     </div>
 
 </div>
+
+
 {% endblock %}

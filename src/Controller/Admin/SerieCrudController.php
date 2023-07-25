@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 
 class SerieCrudController extends AbstractCrudController
 {
@@ -27,6 +28,7 @@ class SerieCrudController extends AbstractCrudController
         
         yield TextField::new('nom_serie' , 'Nom de la série');
         yield TextField::new('descriptif' , 'Descriptif');
+        yield TextEditorField::new('descriptif', 'Descriptif')->setNumOfRows(30);
         yield IntegerField::new('nb_de_tomes', 'Nombre de tomes');
         yield TextField::new('edition', 'Edition');
         yield TextField::new('editeur', 'Editeur');

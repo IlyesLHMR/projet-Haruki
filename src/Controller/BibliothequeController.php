@@ -23,6 +23,7 @@ class BibliothequeController extends AbstractController
     private $userInfo;
     private $session;
 
+    // Le constructeur pour injecter les dépendances.
     public function __construct(ManagerRegistry $doctrine,  AppHelpers $app, RequestStack $requestStack)
     {
         $this->app = $app;
@@ -32,29 +33,28 @@ class BibliothequeController extends AbstractController
         $this->session = $requestStack->getSession();
     }
 
-    // Affichage de la page /bibliotheque pour l'affichage des series.
+    // Affichage de la page /bibliotheque pour l'affichage des séries.
     public function index(SerieRepository $serieRepo, PaginatorInterface $paginator, Request $request): Response
     {
-      
+        // Récupérer les séries depuis la base de données et paginer les résultats.
         $serieRepo = $paginator->paginate(
             $serieRepo = $this->db->getRepository(Serie::class)->findAll(),
             $request->query->getInt('page', 1),
             5
         );
+
         $userSeries = [];
         $listes = [];
-        if($this->userInfo->user) {
+
+        // Vérifier si un utilisateur est connecté.
+        if ($this->userInfo->user) {
             $listes = $this->userInfo->user->getListeLecture();
-            foreach($listes as $liste) {
-                foreach($liste->getSerie() as $serie){
+            foreach ($listes as $liste) {
+                foreach ($liste->getSerie() as $serie){
                     $userSeries[] = $serie;
                 }
             }
         }
-
-        // Utiliser shuffle pour l'affichage de manière aléatoire des valeurs de ma bdd
-        
-        // dd($userSeries);
 
         return $this->render('bibliotheque/index.html.twig', [
             'userInfo' => $this->userInfo,
@@ -62,28 +62,23 @@ class BibliothequeController extends AbstractController
             'series' => $serieRepo,
             'listes' => $listes,
             'userSeries' => $userSeries,
-
         ]);
-        
     }
 
-    // Affichage de la page de détail des series pour l'affichage des mangas. 
-    // #[Route("/bibliotheque/{id}",name:"app_detail_serie")]
+    // Affichage de la page de détail des séries pour l'affichage des mangas.
+    // #[Route("/bibliotheque/{id}", name: "app_detail_serie")]
     public function detail($id, SerieRepository $serieRepo, MangaRepository $mangaRepo): Response
     {
+        // Récupérer la série à partir de l'ID fourni dans l'URL
         $serieRepo = $this->db->getRepository(Serie::class)->findOneBy(['id' => $id]);
+
+        // Récupérer les mangas liés à la série
         $mangaRepo = $this->db->getRepository(Manga::class)->findBy(['serie'=> $id]);
 
         return $this->render('bibliotheque/detail.html.twig', [
             'userInfo' => $this->userInfo,
-            'series' =>$serieRepo,
-            'mangas' =>$mangaRepo,
+            'series' => $serieRepo,
+            'mangas' => $mangaRepo,
         ]);
     }
-
-    
-
-    
- 
-    
 }

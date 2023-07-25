@@ -3,17 +3,55 @@
 {% block title %}Haruki - Contact{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_home') }}" class="btn btn-primary m-4">Retour</a>
-    <div class="container">
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success mt-4">
-            {{  message }}
+
+    <div class="first-title bg-primary text-dark py-5">
+        <div class="container">
+            <h3>Formulaire de contact:</h3>
+            <p class="mt-4">Besoin d'aide ou des questions ? Nous sommes là pour vous ! Utilisez ce formulaire de contact pour entrer en communication avec l'équipe Haruki.</p>
         </div>
-    {% endfor %}
-
-        <h1>Formulaire de contact</h1>
-
-        {{form(form)}}
-        <p>*  Champ obligatoire</p>
     </div>
+
+    <div class="container custom-form">
+        {% for message in app.flashes('contactSuccess') %}
+            <div class="alert alert-success mt-4">
+                {{  message }}
+            </div>
+        {% endfor %}
+
+        {% if app.request.headers.get('User-Agent') matches '/(mobile)/i' %}
+
+         {{form(form)}}
+         <p>* Champ obligatoire</p>
+
+        {% else %}
+
+            <form class="mt-4">
+                <div class="form-group">
+                    <label for="nom">Nom*</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message*</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>
+                <div class="form-group mt-3">
+                    <p>* Champ obligatoire</p>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </form>
+            
+        
+
+        
+
+        {% endif %}
+
+    </div>
+
+    <a href="{{ path('app_home') }}" class="btn btn-primary m-4">Retour</a>
+
 {% endblock %}

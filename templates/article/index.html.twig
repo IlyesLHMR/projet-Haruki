@@ -9,6 +9,7 @@
 <div class="first-title bg-primary text-dark py-5">
 	<div class="container">
     	<h3>Nos articles :</h3>
+        <p>Vous pouvez trouver ici, tout les articles publiées par l'équipe Haruki ! Bonne lecture 😊</p>
 	</div>
 </div>
 
@@ -22,7 +23,6 @@
                     <div class="card-body">
                         <h5 class="card-title truncate-title">{{ article.titre }}</h5>
                         <div class="text-center"><a href="{{ path('app_article_details', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a></div>
-                        {# <div class="text-center">{{ article.date_publication }}</div> #}
                     </div>
                 </div>
             </div>

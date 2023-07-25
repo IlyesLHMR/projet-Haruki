@@ -11,6 +11,7 @@ use DateTimeImmutable;
 use App\Entity\Article;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
+
 class ArticleCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -30,11 +31,13 @@ class ArticleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
 {
     yield TextField::new('titre', 'Titre de l\'article');
-    yield TextField::new('contenu', 'Contenu de l\'article')
-        ->formatValue(function ($value, $entity) {
-            return nl2br($value);
-        })
-        ->setFormTypeOption('attr', ['class' => 'large-textarea']);
+    // yield TextField::new('contenu', 'Contenu de l\'article')
+    //     ->formatValue(function ($value, $entity) {
+    //         return nl2br($value);
+    //     })
+    //     ->setFormTypeOption('attr', ['class' => 'large-textarea']);
+
+    yield TextEditorField::new('contenu', 'Contenu de l\'article')->setNumOfRows(30);
     yield ImageField::new('image', 'Image de l\'article')
         ->setUploadDir('public/assets/img/article')
         ->setBasePath('assets/img/article')

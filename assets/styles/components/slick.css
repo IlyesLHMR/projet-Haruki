@@ -1,0 +1,16 @@
+
+.slick-img {
+    max-width : 100%;
+    max-height : 180px;
+    object-fit: contain;
+    margin: auto;
+}
+.slick-img-desktop{
+    max-width : 100%;
+    max-height : 350px;
+    object-fit: contain;
+    margin: auto;
+}
+
+
+  

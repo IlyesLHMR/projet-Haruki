@@ -5,10 +5,16 @@
 
 {% block contentFullWidth %}
 
-	<div class="m-5 p-5 border border-primary d-flex flex-column justify-content-center align-items-center">
+	<div class="container text-center mt-4 mb-4">
+	<div class="m-3 p-1 border border-primary d-flex flex-column justify-content-center align-items-center">
 		<strong class ="mb-2">Un email de confirmation vous à été envoyé...</strong>
 		<p>Vous pouvez dès à présent poursuivre votre navigation ! </p>
 		<p>Toutefois pour verifier votre compte, n'oubliez pas de valider votre email. </p>
+		<p>Toute l'équpe Haruki vous souhaite une bonne navigation ! 😊</p>
 	</div>
 
+	<div class="container">
+		<a href="{{ path('app_home') }}" class="btn btn-primary m-4">Retour à la page d'accueil</a>
+	</div>
+</div>
 {% endblock %}

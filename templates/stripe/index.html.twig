@@ -9,7 +9,7 @@
       <div class="col-lg-4 col-md-6 col-sm-10"> <!-- Ajout de la classe col-sm-10 pour spécifier que sur les smartphones, la colonne occupera 10 unités -->
         <div class="card">
           <div class="card-body">
-            {% for message in app.flashes('success') %}
+            {% for message in app.flashes('success_don') %}
             <div style="color: green; border: 2px green solid; text-align: center; padding: 5px; margin-bottom: 10px;">
               {{ message }}
             </div>

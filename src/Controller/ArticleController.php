@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Article;
 
-
 class ArticleController extends AbstractController
 {
     private string $bodyId;
@@ -20,7 +19,7 @@ class ArticleController extends AbstractController
     private $userInfo;
     private $session;
 
-    public function __construct(ManagerRegistry $doctrine,  AppHelpers $app, RequestStack $requestStack)
+    public function __construct(ManagerRegistry $doctrine, AppHelpers $app, RequestStack $requestStack)
     {
         $this->app = $app;
         $this->bodyId = $app->getBodyId('BIBLIOTHEQUE');
@@ -29,26 +28,31 @@ class ArticleController extends AbstractController
         $this->session = $requestStack->getSession();
     }
 
-    #[Route('/article', name: 'app_article')]
+    /**
+     * @Route("/article", name="app_article")
+     */
     public function index(ArticleRepository $articleRepo): Response
     {
+        // Récupérer tous les articles depuis le repository d'articles
+        $articles = $articleRepo->findAll();
 
-    $articleRepo = $this->db->getRepository(Article::class)->findAll();
-    
         return $this->render('article/index.html.twig', [
             'userInfo' => $this->userInfo,
-            'articles' => $articleRepo
+            'articles' => $articles
         ]);
     }
 
-    #[Route('/article/{id}', name: 'app_article_details')]
-    public function show( $id, ArticleRepository $articleRepo): Response
+    /**
+     * @Route("/article/{id}", name="app_article_details")
+     */
+    public function show($id, ArticleRepository $articleRepo): Response
     {
-        $articleRepo = $this->db->getRepository(Article::class)->findOneBy(['id' => $id]);;
+        // Récupérer un article en fonction de l'ID passé dans l'URL depuis le repository d'articles
+        $article = $articleRepo->findOneBy(['id' => $id]);
 
-    return $this->render('article/detail.html.twig', [
-        'userInfo' => $this->userInfo,
-        'article' => $articleRepo
-    ]);
-}
+        return $this->render('article/detail.html.twig', [
+            'userInfo' => $this->userInfo,
+            'article' => $article
+        ]);
+    }
 }

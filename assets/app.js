@@ -12,8 +12,6 @@ import './styles/app.scss';
 import './js/navbar.js';
 import './js/serie-list.js';
 import './js/liste-de-lecture.js';
-import './js/article.js';
-import './js/carroussel.js';
 
 
 

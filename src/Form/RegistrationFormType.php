@@ -18,13 +18,20 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', null, [
+                'label' => 'Email *',
+                'attr' => ['placeholder' => 'Entrez votre adresse mail'],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'J\'accepte les conditions générales d\'utilisation et la politique de confidentialité *',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter nos conditions.',
                     ]),
+                ],
+                'attr' => [
+                    'class' => 'form-check-input',
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
@@ -34,17 +41,22 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe doivent être identiques.',
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmez le mot de passe'],
-                'attr' => ['autocomplete' => 'new-password'],
+                'first_options'  => [
+                    'label' => 'Mot de passe *',
+                    'attr' => ['autocomplete' => 'new-password', 'placeholder' => 'Entrez votre mot de passe'],
+                ],
+                'second_options' => [
+                    'label' => 'Confirmez le mot de passe *',
+                    'attr' => ['autocomplete' => 'new-password', 'placeholder' => 'Confirmez votre mot de passe'],
+                ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
+                        // Longueur maximale autorisée par Symfony pour des raisons de sécurité
                         'max' => 4096,
                     ]),
                 ],

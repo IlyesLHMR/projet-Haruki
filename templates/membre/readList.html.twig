@@ -1,59 +1,88 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	
-
+    <!-- Première section avec titre et description -->
     <div class="first-title bg-primary text-dark py-5">
-	    <div class="container">
-        	<h3>Gérez vos listes de lectures:</h3>
-	    </div>
+        <div class="container">
+            <h3>Gérez vos listes de lectures:</h3>
+            <p>Ici, vous pouvez créer et gérer vos listes de lectures. Rendez-vous ensuite dans la bibliothèque pour ajouter vos séries préférées à ces listes de lectures !</p>
+        </div>
     </div>
 
-	<div class="d-flex justify-content-end mt-4 mb-5">
-		<a href="{{ path('app_member_createList') }}" class="btn btn-primary new-btn">Nouvelle liste</a>
-	</div>
+    <!-- Bouton pour créer une nouvelle liste de lecture -->
+    <div class="d-flex justify-content-end mt-4 mb-5">
+        <a href="{{ path('app_member_createList') }}" class="btn btn-primary new-btn mr-3">Nouvelle liste</a>
+    </div>
 
-	{% if listes is not empty %}
-		{% for liste in listes %}
-			<div class="container limit-fav">
-				<div class="container m-3">
-					<h4>{{ liste.titre }}</h4>
-				</div>
-				<div class="container">
-					<a href="{{ path('app_member_editList', { id: liste.id }) }}" class="btn btn-primary mb-2">modifier</a>
-					<a href="{{ path('app_member_deleteList', { id: liste.id }) }}" class="btn btn-danger mb-2">Supprimer</a>
-					<hr>
-					<div class="container d-flex flex-row flex-wrap">
-					{% for serie in liste.serie %}
-						<div class="bookCard zoom">
-							<a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}">
-								<img style="" src="{{ asset('assets/img/uploaded/' ~ serie.coverSerie) }}" alt="cover">
+    <!-- Vérifie s'il y a des listes de lecture à afficher -->
+    {% if listes is not empty %}
+        {% for liste in listes %}
+            <!-- Bloc pour chaque liste de lecture -->
+            <div class="container limit-fav">
+                <div class="container m-3">
+                    <h4>{{ liste.titre }}</h4>
+                </div>
+                <div class="container">
+                    <!-- Bouton pour modifier la liste -->
+                    <a href="{{ path('app_member_editList', { id: liste.id }) }}" class="btn btn-primary mb-2">modifier</a>
 
-								<div class="card-body">
-									<h5 class="card-title border-bottom border-1 border-danger"> {{ serie.nomSerie }}</h5>
-									<p class="card-text"><em>ed. {{ serie.editeur }}</em></p>
-									<p class="card-text">{{ serie.nbDeTomes }} tomes</p> 
-								</div>
-							</a>
+                    <!-- Bouton pour supprimer la liste (avec modal de confirmation) -->
+                    <!-- <a href="{{ path('app_member_deleteList', { id: liste.id }) }}" class="btn btn-danger mb-2">Supprimer</a> -->
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#confirmDelete" class="btn btn-danger mb-2">Supprimer</a>
+                    <hr>
 
-							<div class="remove-from-list-trigger cursor-pointer" title="Retirer de la liste" data-serieId="{{ serie.id }}" data-listeId="{{ liste.id }}">
-								<span class="material-symbols-outlined">close</span>
-							</div>
+                    <!-- Affichage des séries associées à cette liste -->
+                    <div class="container d-flex flex-row flex-wrap">
+                        {% for serie in liste.serie %}
+                            <div class="bookCard zoom">
+                                <a class="card overflow-hidden" href="{{path('app_detail_serie', {id:serie.id})}}">
+                                    <img style="" src="{{ asset('assets/img/uploaded/' ~ serie.coverSerie) }}" alt="cover">
 
-							<div class="card-spinner d-none">
-								<div class="spinner-border" role="status">
-									<span class="visually-hidden">Loading...</span>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-					</div>
-					
-				</div>
-			</div>
-		{% endfor %}
-	{% else %}
-		<p>Aucune liste de lecture disponible</p>
+                                    <div class="card-body">
+                                        <h5 class="card-title border-bottom border-1 border-danger">{{ serie.nomSerie }}</h5>
+                                        <p class="card-text"><em>ed. {{ serie.editeur }}</em></p>
+                                        <p class="card-text">{{ serie.nbDeTomes }} tomes</p> 
+                                    </div>
+                                </a>
 
-	{% endif %}
+                                <!-- Bouton pour retirer une série de la liste de lecture -->
+                                <div class="remove-from-list-trigger cursor-pointer" title="Retirer de la liste" data-serieId="{{ serie.id }}" data-listeId="{{ liste.id }}">
+                                    <span class="material-symbols-outlined">close</span>
+                                </div>
+
+                                <!-- Spinner de chargement lors du retrait de la série de la liste -->
+                                <div class="card-spinner d-none">
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal de confirmation de suppression -->
+            <div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Suppression</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Voulez-vous vraiment supprimer cette liste de lecture ?</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="{{ path('app_member_deleteList', { id: liste.id }) }}" class="btn btn-primary">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <!-- Aucune liste de lecture disponible -->
+        <p>Aucune liste de lecture disponible, commencez par en créer une en appuyant sur "Nouvelle liste"</p>
+    {% endif %}
 {% endblock %}

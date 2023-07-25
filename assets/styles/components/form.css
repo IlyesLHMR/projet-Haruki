@@ -1,0 +1,13 @@
+.custom-form {
+    max-width: 600px;
+    /* Réduire la largeur du formulaire */
+    margin: 0 auto;
+    /* Centrer horizontalement */
+}
+
+.custom-form .form-group {
+    width: 50%;
+    /* Réduire la taille des champs de moitié */
+    margin: 0 auto;
+    /* Centrer horizontalement */
+}
